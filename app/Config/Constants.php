@@ -77,14 +77,18 @@ defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 
-define('SITE_NAME', 'NikahKuy'); ///NAMA WEBSITE
+define('SITE_NAME', 'Undesia'); ///NAMA WEBSITE
 
 // =========== production mode ============
 // //LINK DOMAIN WITH URL
-define('SITE_UTAMA', 'https://digitalku.online/'); 
+define('SITE_UTAMA', 'https://undesia.com/'); 
 define('SITE_UNDANGAN', 'https://undangan.digitalku.online/');
 define('SITE_ADMIN', 'https://admin.digitalku.online/');
 define('SITE_BUKUTAMU', 'https://bukutamu.digitalku.online/');
+// define('SITE_UTAMA', 'https://undesia.com/'); 
+// define('SITE_UNDANGAN', 'https://undangan.digitalku.online/');
+// define('SITE_ADMIN', 'https://admin.digitalku.online/');
+// define('SITE_BUKUTAMU', 'https://bukutamu.digitalku.online/');
 
 //DOMAIN ONLY
 define('DOMAIN_UTAMA', 'digitalku.online');
