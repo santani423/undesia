@@ -1,0 +1,42 @@
+INFO - 2025-03-07 10:43:46 --> Controller "App\Controllers\base\Beranda" loaded.
+CRITICAL - 2025-03-07 10:43:46 --> Access denied for user '****'@'localhost' (using password: YES)
+#0 C:\xampp7-4\htdocs\File\system\Database\BaseConnection.php(377): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp7-4\htdocs\File\system\Database\BaseConnection.php(643): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp7-4\htdocs\File\system\Database\BaseBuilder.php(1819): CodeIgniter\Database\BaseConnection->query('SELECT `themes`...', Array, false)
+#3 C:\xampp7-4\htdocs\File\app\Models\base\BerandaModel.php(44): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp7-4\htdocs\File\app\Controllers\base\Beranda.php(35): App\Models\base\BerandaModel->get_all_themes()
+#5 C:\xampp7-4\htdocs\File\system\CodeIgniter.php(910): App\Controllers\base\Beranda->index()
+#6 C:\xampp7-4\htdocs\File\system\CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\base\Beranda))
+#7 C:\xampp7-4\htdocs\File\system\CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp7-4\htdocs\File\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+INFO - 2025-03-07 10:46:58 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:47:49 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:48:05 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:48:08 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:48:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-03-07 10:48:56 --> Controller "App\Controllers\base\Order" loaded.
+INFO - 2025-03-07 10:48:56 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:49:00 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:49:00 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:49:16 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:55:56 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:55:59 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:56:02 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:56:05 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:56:14 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:56:16 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:56:18 --> Controller "App\Controllers\base\Beranda" loaded.
+INFO - 2025-03-07 10:57:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-03-07 10:57:14 --> Controller "App\Controllers\base\Order" loaded.
+INFO - 2025-03-07 10:57:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-03-07 10:57:49 --> Controller "App\Controllers\base\Order" loaded.
+INFO - 2025-03-07 10:58:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-03-07 10:58:03 --> Controller "App\Controllers\base\Order" loaded.
+INFO - 2025-03-07 10:58:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-03-07 10:58:15 --> Controller "App\Controllers\base\Order" loaded.
+INFO - 2025-03-07 10:58:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-03-07 10:58:24 --> Controller "App\Controllers\base\Order" loaded.
+INFO - 2025-03-07 10:58:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-03-07 10:58:26 --> Controller "App\Controllers\base\Order" loaded.
+INFO - 2025-03-07 10:58:43 --> Controller "App\Controllers\base\Beranda" loaded.

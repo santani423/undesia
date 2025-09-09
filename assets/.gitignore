@@ -1,0 +1,2 @@
+# Ignore CI4 sensitive database config
+app/Config/Database.php
