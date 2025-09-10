@@ -4,7 +4,7 @@
         <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
         <div>
         
-        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTambah">Tambah Tema</button>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTambah">Tambah Tema2</button>
         
         </div>
     </div>
