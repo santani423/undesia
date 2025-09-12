@@ -1,0 +1,13 @@
+INFO - 2025-09-12 15:32:32 --> Controller "App\Controllers\base\Beranda" loaded.
+CRITICAL - 2025-09-12 15:32:32 --> Access denied for user '****'@'localhost' (using password: YES)
+#0 C:\xampp7-4\htdocs\udasia\system\Database\BaseConnection.php(377): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp7-4\htdocs\udasia\system\Database\BaseConnection.php(643): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp7-4\htdocs\udasia\system\Database\BaseBuilder.php(1819): CodeIgniter\Database\BaseConnection->query('SELECT `themes`...', Array, false)
+#3 C:\xampp7-4\htdocs\udasia\app\Models\base\BerandaModel.php(44): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp7-4\htdocs\udasia\app\Controllers\base\Beranda.php(35): App\Models\base\BerandaModel->get_all_themes()
+#5 C:\xampp7-4\htdocs\udasia\system\CodeIgniter.php(910): App\Controllers\base\Beranda->index()
+#6 C:\xampp7-4\htdocs\udasia\system\CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\base\Beranda))
+#7 C:\xampp7-4\htdocs\udasia\system\CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp7-4\htdocs\udasia\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+INFO - 2025-09-12 15:33:36 --> Controller "App\Controllers\base\Beranda" loaded.
