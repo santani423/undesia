@@ -99,7 +99,7 @@
 
 <body>
   <!-- Tambahkan sebelum penutup </body> -->
-<a href="https://wa.me/<?= $setting[0]->no_wa ?>" 
+<a href="https://api.whatsapp.com/send?phone=<?= $setting[0]->no_wa; ?>&text=<?= $setting[0]->pesan_wa; ?>" 
    class="whatsapp-float" 
    target="_blank">
    <i class="fa-brands fa-whatsapp"></i>
