@@ -111,8 +111,10 @@
           <nav class="navbar navbar-expand-lg navbar-light p-0">
             <a class="navbar-brand pt-0" href="<?php if ($title != 'Beranda') {
                                                   echo  '/';
-                                                } ?>#"><img src="<?php echo base_url() ?>/assets/base/img/logo4.png" alt="Undangan Online | Unik, Murah, Modern" width="10%"
-                alt="" class="img-fluid diverge-logo"></a>
+                                                } ?>#"><img src="<?= base_url() ?>/assets/base/img/logo4.png" 
+     alt="Undangan Online | Unik, Murah, Modern"  
+     class="img-fluid w-50">
+</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
               aria-expanded="false" aria-label="Toggle navigation">

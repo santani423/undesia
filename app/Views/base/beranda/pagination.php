@@ -16,10 +16,10 @@
 
         <?php 
             foreach ($pager->links() as $link) { 
-                $activeclass = $link['active']?'active':'';
+                $activeclass = $link['active']?'bg-success text-white':'';
         ?>
-            <li class="numb <?= $activeclass ?>">
-                <a href="<?= $link['uri'] ?>" class="page-link">
+            <li class="numb ">
+                <a href="<?= $link['uri'] ?>" class="<?= $activeclass ?>">
                     <?= $link['title'] ?>
                 </a>
             </li>

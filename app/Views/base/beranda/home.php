@@ -102,7 +102,7 @@
 
 
 <!-- Categories-SECTION -->
-<section class="categories-section overflow-hidden position-relative">
+<section class="categories-section overflow-hidden position-relative" id="fitur">
   <figure class="hearts-img">
     <img src="<?php echo base_url() ?>/assets/images/categories-img1.png" alt="" class="star">
   </figure>
@@ -232,7 +232,7 @@
             <p class="pricing-free-text">Aktif <?= $data->masa_aktif ?> Hari</p>
             <p class="pricing-plane-prices">Rp <?= number_format($data->harga_paket, 0, ',', '.') ?></p>
 
-            <ul class="pricing-list list-unstyled mb-3">
+            <ul class="pricing-list list-unstyled  m-3">
               <li><?= $data->tema_bebas == 0 ? 'Hanya 1 Tema' : 'Bebas Pilih Tema' ?></li>
               <li>Edit Tanpa Batas</li>
               <li <?= $data->kirim_whatsapp != 1 ? 'style="text-decoration:line-through;text-decoration-thickness:2px;"' : '' ?>>Kirim Undangan</li>
@@ -375,7 +375,7 @@
   <figure class="hearts-img">
     <img src="<?php echo base_url() ?>/assets/images/categories-img1.png" alt="" class="">
   </figure>
-  <div class="row">
+  <div class="row"  id="themes">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-lg-1 order-1">
       <div class="about-us-content aos-init aos-animate">
         <div class="cate-icon-outer">
@@ -437,7 +437,7 @@
             </h3>
             <a href="<?= base_url() ?>/tema" class="text-decoration-none">Lihat Lebih Banyak</a>
           </div>
-          <div class="get-in-touch gallery-page mt-5">
+          <div class="get-in-touch gallery-page mt-5"  id="themes_video">
             <div class="container">
               <div class="about-us-content aos-init aos-animate text-center">
                 <h2>Undangan <span>Video</span></h2>
