@@ -8,6 +8,11 @@
   <title><?php if ($title != 'Beranda') {
             echo $title . ' -';
           } ?> <?= SITE_NAME ?> | Unik, Murah, Modern</title>
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="<?php echo base_url() ?>/assets/base/img/favicon.ico">
+  <link rel="apple-touch-icon" href="<?php echo base_url() ?>/assets/base/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url() ?>/assets/base/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url() ?>/assets/base/img/favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url() ?>/assets/images/favicons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url() ?>/assets/images/favicons/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url() ?>/assets/images/favicons/apple-icon-72x72.png">
