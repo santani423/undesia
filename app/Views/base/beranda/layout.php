@@ -95,41 +95,61 @@
       z-index: 10;
     }
   </style>
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u = "//analytics.undesia.com/";
+      _paq.push(['setTrackerUrl', u + 'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d = document,
+        g = d.createElement('script'),
+        s = d.getElementsByTagName('script')[0];
+      g.async = true;
+      g.src = u + 'matomo.js';
+      s.parentNode.insertBefore(g, s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+
 </head>
 
 <body>
   <!-- Tambahkan sebelum penutup </body> -->
-<a href="https://api.whatsapp.com/send?phone=<?= $setting[0]->no_wa; ?>&text=<?= $setting[0]->pesan_wa; ?>" 
-   class="whatsapp-float" 
-   target="_blank">
-   <i class="fa-brands fa-whatsapp"></i>
-</a>
+  <a href="https://api.whatsapp.com/send?phone=<?= $setting[0]->no_wa; ?>&text=<?= $setting[0]->pesan_wa; ?>"
+    class="whatsapp-float"
+    target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
-<style>
-  .whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25d366;
-    color: #fff;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-    z-index: 100;
-  }
+  <style>
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+    }
 
-  .whatsapp-float i {
-    margin-top: 15px;
-  }
+    .whatsapp-float i {
+      margin-top: 15px;
+    }
 
-  .whatsapp-float:hover {
-    background-color: #20b955;
-    color: #fff;
-  }
-</style>
+    .whatsapp-float:hover {
+      background-color: #20b955;
+      color: #fff;
+    }
+  </style>
 
   <!-- HEADER-SECTION -->
   <div class="home-header-section">
