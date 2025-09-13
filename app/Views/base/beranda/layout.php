@@ -98,6 +98,39 @@
 </head>
 
 <body>
+  <!-- Tambahkan sebelum penutup </body> -->
+<a href="https://wa.me/<?= $setting[0]->no_wa ?>" 
+   class="whatsapp-float" 
+   target="_blank">
+   <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 100;
+  }
+
+  .whatsapp-float i {
+    margin-top: 15px;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #20b955;
+    color: #fff;
+  }
+</style>
+
   <!-- HEADER-SECTION -->
   <div class="home-header-section">
     <!-- <figure class="banner-right-img left_icon img">
