@@ -342,28 +342,28 @@
       <!-- Pelanggan -->
       <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
         <div class="card shadow-sm border-0 rounded-3 p-4">
-          <h3 class="sw-counter display-5 fw-bold text-primary" data-count="<?= $total_users ?>">0</h3>
+          <h3 class="sw-counter display-5 fw-bold text-primary" data-count="<?= $total_users ?>">1000+</h3>
           <h5 class="mt-2">Pelanggan</h5>
         </div>
       </div>
       <!-- Undangan Dibuat -->
       <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
         <div class="card shadow-sm border-0 rounded-3 p-4">
-          <h3 class="sw-counter display-5 fw-bold text-success" data-count="<?= $total_users ?>">0</h3>
+          <h3 class="sw-counter display-5 fw-bold text-success" data-count="<?= $total_users ?>">500+</h3>
           <h5 class="mt-2">Undangan Dibuat</h5>
         </div>
       </div>
       <!-- Desain Undangan -->
       <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
         <div class="card shadow-sm border-0 rounded-3 p-4">
-          <h3 class="sw-counter display-5 fw-bold text-warning" data-count="<?= $total_tema ?>">0</h3>
+          <h3 class="sw-counter display-5 fw-bold text-warning" data-count="<?= $total_tema ?>">36</h3>
           <h5 class="mt-2">Desain Undangan</h5>
         </div>
       </div>
       <!-- Ulasan -->
       <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
         <div class="card shadow-sm border-0 rounded-3 p-4">
-          <h3 class="sw-counter display-5 fw-bold text-danger" data-count="<?= $total_testi ?>">0</h3>
+          <h3 class="sw-counter display-5 fw-bold text-danger" data-count="<?= $total_testi ?>">100+</h3>
           <h5 class="mt-2">Ulasan</h5>
         </div>
       </div>
