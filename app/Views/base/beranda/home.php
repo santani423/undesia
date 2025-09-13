@@ -392,21 +392,7 @@
 
           <!-- row2 -->
           <div class="row" data-aos="fade-up">
-            <style>
-              .theme-label {
-                position: absolute;
-                top: 10px;
-                left: 10px;
-                background-color: #f5b400;
-                /* warna kuning keemasan */
-                color: white;
-                font-weight: bold;
-                font-size: 12px;
-                padding: 4px 8px;
-                border-radius: 4px;
-                z-index: 10;
-              }
-            </style>
+            
             <?php
             $no = 1;
             foreach ($tema->getResult() as $row) { ?>

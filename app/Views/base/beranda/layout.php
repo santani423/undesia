@@ -74,6 +74,22 @@
       /* agar gambar center */
     }
   </style>
+
+  <style>
+    .theme-label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #f5b400;
+      /* warna kuning keemasan */
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      z-index: 10;
+    }
+  </style>
 </head>
 
 <body>
@@ -111,10 +127,10 @@
           <nav class="navbar navbar-expand-lg navbar-light p-0">
             <a class="navbar-brand pt-0" href="<?php if ($title != 'Beranda') {
                                                   echo  '/';
-                                                } ?>#"><img src="<?= base_url() ?>/assets/base/img/logo4.png" 
-     alt="Undangan Online | Unik, Murah, Modern"  
-     class="img-fluid w-50">
-</a>
+                                                } ?>#"><img src="<?= base_url() ?>/assets/base/img/logo4.png"
+                alt="Undangan Online | Unik, Murah, Modern"
+                class="img-fluid w-50">
+            </a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
               aria-expanded="false" aria-label="Toggle navigation">
