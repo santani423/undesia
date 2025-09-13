@@ -267,7 +267,7 @@
                         } ?>#" class="text-decoration-none">
                 <figure class="footer-logo"><img src="<?php echo base_url() ?>/assets/base/img/logo4.png" alt="" width="100" class="img-fluid"></figure>
               </a>
-              <p class="footer-section-text">Undesia adalah layanan undangan pernikahan online. Yaitu undangan yang dikemas dalam bentuk web yang praktis dan mudah untuk digunakan maupun dibagikan. </p>
+              <p class="footer-section-text">Undesia adalah layanan undangan pernikahan online yang praktis, modern, dan mudah dibagikan. </p>
               <ul class="list-unstyled footer-social-icons">
                 <li class="list-item">
                   <!-- Instagram -->
