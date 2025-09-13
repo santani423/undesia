@@ -1,3 +1,106 @@
+
+    <!-- BANNER-SECTION -->
+    <div class="home-banner-section overflow-hidden position-relative">
+      <figure class="banner-img1 mb-0">
+        <img src="<?php echo base_url() ?>/assets/images/banner-img1.png" alt="" class="star">
+      </figure>
+      <figure class="banner-img2 mb-0">
+        <img src="<?php echo base_url() ?>/assets/images/banner-img2.png" alt="" class="star">
+      </figure>
+      <div class="banner-container-box">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-md-0 mb-4 text-md-left text-center order-lg-1 order-2">
+
+              <div class="banner-img-content position-relative">
+                <figure class="banner-img mb-0">
+                  <img class="img-fluid banner-img-width"
+                    src="<?php echo base_url() ?>/assets/images/bridely-banner-left-img.png" alt="">
+                </figure>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 order-lg-2 order-1">
+              <div class="home-banner-text position-relative" data-aos="fade-up" id="myContentDIV">
+                <figure class="ring-icon-img mb-0">
+                  <img src="<?php echo base_url() ?>/assets/images/ring-icon-banner.png" alt="">
+                </figure>
+                <h1>BERBAGI UNDANGAN LEBIH MUDAH </h1>
+                <p class="banner-paragraph">
+                  Solusi pernikahan lebih hemat, praktis, dan kekinian dengan e-invitation yang disebar otomatis untuk memberikan kesan terbaik
+                </p>
+                <div class="banner-btn discover-btn-banner">
+                  <a href="about.html" class="text-decoration-none">
+                    <!-- <i     class="fa fa-clipboard-list"></i> -->
+                    Registrasi Gratis</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- About-us-section -->
+    <div class="about-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 order-lg-1 order-1">
+            <div class="about-us-content aos-init aos-animate" data-aos="fade-up">
+
+              <h2>Mengapa Undangan Digital?</h2>
+              <p class="aboutus-p">Apa saja keuntungan menggunakan undangan digital berbasis website</p>
+
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-5 col-md-12 col-sm-12 order-lg-2 order-2">
+            <div class="about-content-img">
+              <figure class="mb-0 about-section-f1"><img src="<?php echo base_url() ?>/assets/images/about-bird-icon.png" alt="" class="star">
+              </figure>
+              <div class="row">
+                <!-- Kolom 1 -->
+                <div class="col-md-6 mb-3">
+                  <div class=" h-100 text-center p-3">
+                    <figure class="mb-3 category-section-f2">
+                      <img src="<?php echo base_url() ?>/assets/beranda/themes/img/dollar.png" alt="">
+                    </figure>
+                    <h6>Mudah, Cepat & Murah</h6>
+                    <p>Gak perlu nunggu lama membuat undangan, dan kamu juga sudah bisa bikin undangan online dengan harga termurah.</p>
+                  </div>
+                </div>
+
+                <!-- Kolom 2 -->
+                <div class="col-md-6 mb-3">
+                  <div class=" h-100 text-center p-3">
+                    <figure class="mb-3 category-section-f2">
+                      <img src="<?php echo base_url() ?>/assets/beranda/themes/img/domain.png" alt="">
+                    </figure>
+                    <h6>Mudah Menentukan Domain </h6>
+                    <p>Mudah membuat URL unik untuk website undangan kamu, dengan menggunakan kata-kata sesuai dengan keinginan kamu.</p>
+                  </div>
+                </div>
+
+                <!-- Kolom 3 (akan turun ke baris berikutnya otomatis) -->
+                <div class="col-md-12 mb-3">
+                  <div class=" h-100 text-center p-3">
+                    <figure class="mb-3 category-section-f2">
+                      <img src="<?php echo base_url() ?>/assets/beranda/themes/img/social-media.png" alt="">
+                    </figure>
+                    <h6>
+                      Sebarkan Undangan kamu
+                    </h6>
+                    <p>Jangkau tamu undangan lebih banyak, kamu dapat membagikan di mana dan kapan saja dengan mudahnya kamu share di social media.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
 <!-- Categories-SECTION -->
 <section class="categories-section overflow-hidden position-relative">
   <figure class="hearts-img">
@@ -267,3 +370,111 @@
     </div>
   </div>
 </div>
+
+<section class="event-org-section event-org-section-page overflow-hidden position-relative">
+  <figure class="hearts-img">
+    <img src="<?php echo base_url() ?>/assets/images/categories-img1.png" alt="" class="">
+  </figure>
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-lg-1 order-1">
+      <div class="about-us-content aos-init aos-animate">
+        <div class="cate-icon-outer">
+          <figure class="cate-icon-img mb-0">
+            <img src="<?php echo base_url() ?>/assets/images/categories-logo-img.png" alt="">
+          </figure>
+        </div>
+        <h2>Pilihan Tema Undangan</h2>
+        <p class="aboutus-p aos-init aos-animate">Kaka penasaran bagaimana jadinya? pilih salah satu untuk melihat demonya
+          selain itu Undesia banyak pilihan tema undangan digital yang menarik dan eksklusif.</p>
+      </div>
+      <div class="get-in-touch gallery-page">
+        <div class="container">
+
+          <!-- row2 -->
+          <div class="row" data-aos="fade-up">
+            <style>
+              .theme-label {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: #f5b400;
+                /* warna kuning keemasan */
+                color: white;
+                font-weight: bold;
+                font-size: 12px;
+                padding: 4px 8px;
+                border-radius: 4px;
+                z-index: 10;
+              }
+            </style>
+            <?php
+            $no = 1;
+            foreach ($tema->getResult() as $row) { ?>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-5">
+                <div class="gallery_content">
+                  <figure class="contact-form-img">
+                    <span class="theme-label"><?= $row->name ?></span>
+                    <img src="<?= base_url() ?>/assets/themes/<?= $row->nama_theme ?>/preview.png" alt="" class="img-fluid">
+                  </figure>
+
+                  <h3><?= htmlentities($row->nama_theme) ?></h3>
+                  <div class="banner-btn discover-btn-banner">
+                    <a href="<?= base_url('demo/' . $row->nama_theme) ?>" target="_blank" class="btn btn-primary">Demo
+                    </a>
+                    <a href="<?= base_url('order/' . $row->kode_theme) ?>" class="btn sw-button btn-shop">Buat Undangan
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <?php
+              if ($no++ == 6) break;
+            }  ?>
+
+          </div>
+          <div class="banner-btn discover-btn-banner">
+            <h3>Lihat Lebih Banyak Template Undangan Website
+              <?= SITE_NAME ?>
+            </h3>
+            <a href="<?= base_url() ?>/tema" class="text-decoration-none">Lihat Lebih Banyak</a>
+          </div>
+          <div class="get-in-touch gallery-page mt-5">
+            <div class="container">
+              <div class="about-us-content aos-init aos-animate text-center">
+                <h2>Undangan <span>Video</span></h2>
+
+              </div>
+
+              <!-- row2 -->
+              <div class="row" data-aos="fade-up">
+                <?php
+                $i = 1;
+                foreach ($tema_video->getResult() as $row) { ?>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-3">
+                    <div class="gallery_content">
+                      <figure class="contact-form-img">
+                        <img src="<?php echo base_url() ?>/assets/themes_video/<?= $row->preview ?>" alt="" class="img-fluid">
+                      </figure>
+                      <h4><?= $row->nama_tema ?></h4>
+                      <p>Rp. <?= number_format($row->harga) ?></p>
+                    </div>
+                  </div>
+
+                <?php if ($i++ == 6) break;
+                } ?>
+              </div>
+              <div class="banner-btn discover-btn-banner">
+                <a href="<?= base_url() ?>/tema_video" class="text-decoration-none">Lihat Lebih Banyak</a>
+              </div>
+            </div>
+            <figure class="gallery-design-img">
+              <img src="<?php echo base_url() ?>/assets/images/gallery-design-img.png" alt="">
+            </figure>
+          </div>
+        </div>
+        <figure class="gallery-design-img">
+          <img src="<?php echo base_url() ?>/assets/images/gallery-design-img.png" alt="">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
