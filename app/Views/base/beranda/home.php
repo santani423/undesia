@@ -342,7 +342,8 @@
       <!-- Pelanggan -->
       <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
         <div class="card shadow-sm border-0 rounded-3 p-4">
-          <h3 class="sw-counter display-5 fw-bold text-primary" data-count="<?= $total_users ?>">1000+</h3>
+          <!-- <h3 class="sw-counter display-5 fw-bold text-primary" data-count="<?= $total_users ?>">1000+</h3> -->
+          <h3 class="sw-counter display-5 fw-bold text-primary"  >1000+</h3>
           <h5 class="mt-2">Pelanggan</h5>
         </div>
       </div>
