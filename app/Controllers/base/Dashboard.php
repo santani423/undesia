@@ -1501,7 +1501,7 @@ Balas *OK* agar bisa diklik Link Undangan';
         $credit_card['secure'] = true;
         //ser save_card true to enable oneclick or 2click
         //$credit_card['save_card'] = true;
-        return 'qwick';
+        return 'qwicsdsdsdk';
         $transaction_data = array(
             'transaction_details' => $transaction_details,
             'customer_details'       => $customer_details,
