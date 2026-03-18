@@ -391,7 +391,7 @@ class DashboardModel extends Model
         $builder->join('users', 'pembayaran.id_user = users.id');
         $where = "pembayaran.id_user=".$_SESSION['id']." AND pembayaran.status_order = '1' " ;
         $builder->where($where);
-        $query = $builder->get();
+        $query = $builder->get(); 
         return $query->getResult();
     }
     

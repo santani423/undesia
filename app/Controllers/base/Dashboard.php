@@ -1474,8 +1474,8 @@ Balas *OK* agar bisa diklik Link Undangan';
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
         $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
-        return  $ordernya;
         foreach ($ordernya as $order) {
+            return  'sdfsdf';
             $order_id = $order->invoice;
             $harga = $order->harga;
             $email = $order->email;
