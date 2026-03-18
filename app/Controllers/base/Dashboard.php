@@ -1501,13 +1501,13 @@ Balas *OK* agar bisa diklik Link Undangan';
         $credit_card['secure'] = true;
         //ser save_card true to enable oneclick or 2click
         //$credit_card['save_card'] = true;
-        return 'qwicsdsdsdk';
         $transaction_data = array(
             'transaction_details' => $transaction_details,
             'customer_details'       => $customer_details,
             'credit_card'        => $credit_card,
             'expiry'             => $custom_expiry
         );
+        return 'qwewqeqwe';
         error_log(json_encode($transaction_data));
 
         $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
