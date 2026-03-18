@@ -1501,6 +1501,7 @@ Balas *OK* agar bisa diklik Link Undangan';
         $credit_card['secure'] = true;
         //ser save_card true to enable oneclick or 2click
         //$credit_card['save_card'] = true;
+        return 'qwick';
         $transaction_data = array(
             'transaction_details' => $transaction_details,
             'customer_details'       => $customer_details,
@@ -1509,7 +1510,6 @@ Balas *OK* agar bisa diklik Link Undangan';
         );
         error_log(json_encode($transaction_data));
 
-        return 'qwick';
         $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
         echo $snapToken;
     }
