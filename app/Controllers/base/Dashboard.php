@@ -1459,67 +1459,59 @@ Balas *OK* agar bisa diklik Link Undangan';
 
     public function token()
     {
-        // Ambil config
-        $setting = $this->DashboardModel->get_setting_bayar()[0];
-
-        \Midtrans\Config::$serverKey = $setting->serverkey_midtrans;
-        \Midtrans\Config::$isProduction = ($setting->midtrans_production === 'true');
+        foreach ($this->DashboardModel->get_setting_bayar() as $row) {
+            $url = $row->url_midtrans;
+            $server = $row->serverkey_midtrans;
+            $client = $row->clientkey_midtrans;
+            $production = $row->midtrans_production;
+        }
+        \Midtrans\Config::$serverKey = $server;
+        if ($production == 'true') {
+            \Midtrans\Config::$isProduction = true;
+        } else {
+            \Midtrans\Config::$isProduction = false;
+        }
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
+        $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
+        foreach ($ordernya as $order) {
 
-        // Ambil 1 order saja (PENTING)
-        $order = $this->DashboardModel->get_pembayaran_by_id_user();
-
-        if (!$order || empty($order)) {
-            return response()->setJSON([
-                'error' => 'Order tidak ditemukan'
-            ]);
+            $order_id = $order->invoice;
+            $harga = $order->harga;
+            $email = $order->email;
+            $hp = $order->hp;
         }
-
-        // kalau array ambil pertama
-        $order = $order[0];
-
-        // Pastikan unik
-        $order_id = $order->invoice . '-' . time();
-
-        $transaction_details = [
+        // Required
+        $transaction_details = array(
             'order_id' => $order_id,
-            'gross_amount' => (int)$order->harga
-        ];
+            'gross_amount' => $harga // no decimal allowed for creditcard
+        );
+        $customer_details = array(
+            'email'         => $email,
+            'phone'         => $hp
+        );
+        $time = time();
 
-        $customer_details = [
-            'email' => $order->email,
-            'phone' => $order->hp
-        ];
-
-        // Expiry (opsional, bisa dihapus kalau sering error)
-        $custom_expiry = [
-            'start_time' => date("Y-m-d H:i:s O"),
+        $custom_expiry = array(
+            'start_time' => date("Y-m-d H:i:s O", $time),
             'unit' => 'hour',
-            'duration' => 1
-        ];
-
-        $transaction_data = [
+            'duration'  => 1
+        );
+        // Data yang akan dikirim untuk request redirect_url.
+        $credit_card['secure'] = true;
+        //ser save_card true to enable oneclick or 2click
+        //$credit_card['save_card'] = true;
+        $transaction_data = array(
             'transaction_details' => $transaction_details,
-            'customer_details' => $customer_details,
-            'credit_card' => ['secure' => true],
-            'expiry' => $custom_expiry
-        ];
-
-        // Debug log
+            'customer_details'       => $customer_details,
+            'credit_card'        => $credit_card,
+            'expiry'             => $custom_expiry
+        );
         error_log(json_encode($transaction_data));
-
-        try {
-            $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
-
-            return response()->setJSON([
-                'token' => $snapToken
-            ]);
-        } catch (\Exception $e) {
-            return response()->setJSON([
-                'error' => $e->getMessage()
-            ]);
-        }
+        
+        $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
+    
+        echo $snapToken;
     }
     public function attemptOrder()
     {
