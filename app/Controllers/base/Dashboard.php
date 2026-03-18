@@ -1471,10 +1471,10 @@ Balas *OK* agar bisa diklik Link Undangan';
         } else {
             \Midtrans\Config::$isProduction = false;
         }
-        return "ok";
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
         $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
+        return "ok";
         foreach ($ordernya as $order) {
             $order_id = $order->invoice;
             $harga = $order->harga;
