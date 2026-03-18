@@ -1459,56 +1459,57 @@ Balas *OK* agar bisa diklik Link Undangan';
 
     public function token()
     {
-        // foreach ($this->DashboardModel->get_setting_bayar() as $row) {
-        //     $url = $row->url_midtrans;
-        //     $server = $row->serverkey_midtrans;
-        //     $client = $row->clientkey_midtrans;
-        //     $production = $row->midtrans_production;
-        // }
-        // \Midtrans\Config::$serverKey = $server;
-        // if ($production == 'true') {
-        //     \Midtrans\Config::$isProduction = true;
-        // } else {
-        //     \Midtrans\Config::$isProduction = false;
-        // }
-        // \Midtrans\Config::$isSanitized = true;
-        // \Midtrans\Config::$is3ds = true;
-        // $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
-        // foreach ($ordernya as $order) {
-        //     $order_id = $order->invoice;
-        //     $harga = $order->harga;
-        //     $email = $order->email;
-        //     $hp = $order->hp;
-        // }
-        // // Required
-        // $transaction_details = array(
-        //     'order_id' => $order_id,
-        //     'gross_amount' => $harga // no decimal allowed for creditcard
-        // );
-        // $customer_details = array(
-        //     'email'         => $email,
-        //     'phone'         => $hp
-        // );
-        // $time = time();
-        // $custom_expiry = array(
-        //     'start_time' => date("Y-m-d H:i:s O", $time),
-        //     'unit' => 'hour',
-        //     'duration'  => 1
-        // );
-        // // Data yang akan dikirim untuk request redirect_url.
-        // $credit_card['secure'] = true;
-        // //ser save_card true to enable oneclick or 2click
-        // //$credit_card['save_card'] = true;
-        // $transaction_data = array(
-        //     'transaction_details' => $transaction_details,
-        //     'customer_details'       => $customer_details,
-        //     'credit_card'        => $credit_card,
-        //     'expiry'             => $custom_expiry
-        // );
-        // error_log(json_encode($transaction_data));
+        foreach ($this->DashboardModel->get_setting_bayar() as $row) {
+            $url = $row->url_midtrans;
+            $server = $row->serverkey_midtrans;
+            $client = $row->clientkey_midtrans;
+            $production = $row->midtrans_production;
+        }
+        return "ok";
+        \Midtrans\Config::$serverKey = $server;
+        if ($production == 'true') {
+            \Midtrans\Config::$isProduction = true;
+        } else {
+            \Midtrans\Config::$isProduction = false;
+        }
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+        $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
+        foreach ($ordernya as $order) {
+            $order_id = $order->invoice;
+            $harga = $order->harga;
+            $email = $order->email;
+            $hp = $order->hp;
+        }
+        // Required
+        $transaction_details = array(
+            'order_id' => $order_id,
+            'gross_amount' => $harga // no decimal allowed for creditcard
+        );
+        $customer_details = array(
+            'email'         => $email,
+            'phone'         => $hp
+        );
+        $time = time();
+        $custom_expiry = array(
+            'start_time' => date("Y-m-d H:i:s O", $time),
+            'unit' => 'hour',
+            'duration'  => 1
+        );
+        // Data yang akan dikirim untuk request redirect_url.
+        $credit_card['secure'] = true;
+        //ser save_card true to enable oneclick or 2click
+        //$credit_card['save_card'] = true;
+        $transaction_data = array(
+            'transaction_details' => $transaction_details,
+            'customer_details'       => $customer_details,
+            'credit_card'        => $credit_card,
+            'expiry'             => $custom_expiry
+        );
+        error_log(json_encode($transaction_data));
 
-        // $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
-        // echo $snapToken;
+        $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
+        echo $snapToken;
     }
     public function attemptOrder()
     {
