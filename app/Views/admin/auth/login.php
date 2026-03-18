@@ -9,9 +9,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="login-form">
-                            <div class="d-flex justify-content-center">
+                            
                                 <a href="<?= SITE_UTAMA ?>"><img src="<?= base_url() ?>/assets/base/img/logo.png" height="50px"></a>
-                            </div>
+                            
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Login</h1>
                             </div>
