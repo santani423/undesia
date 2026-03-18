@@ -20,26 +20,26 @@ class Dashboard extends Controller
 
     public function index()
     {
-        // if(session()->has('masukUser'))
-        // {
-        //     $data['title'] = 'Dashboard';
-        //     $data['view'] = 'base/dashboard/index';
-        //     $data['pembayaran'] = $this->DashboardModel->get_pembayaran_by_id_user();
-        //     $data['order'] = $this->DashboardModel->get_order_by_id_user(); 
-        //     $data['total_pengunjung'] = $this->DashboardModel->get_total_pengunjung();
-        //     $data['total_komentar'] = $this->DashboardModel->get_total_komentar();
-        //     $data['total_mingguan'] = $this->DashboardModel->get_total_pengunjung_mingguan();
-        //     $data['komentar'] = $this->DashboardModel->get_all_komen();
-        //     $data['pengunjung'] = $this->DashboardModel->get_all_pengunjung();
-        //     $data['testimoni'] = $this->DashboardModel->get_testi_by_id_user();
-        //     $data['setting'] = $this->DashboardModel->get_setting();
-        //     $data['setting_bayar'] = $this->DashboardModel->get_setting_bayar();
-        //     $data['data'] = $this->DashboardModel->get_data_by_id_user();
+        if(session()->has('masukUser'))
+        {
+            $data['title'] = 'Dashboard';
+            $data['view'] = 'base/dashboard/index';
+            $data['pembayaran'] = $this->DashboardModel->get_pembayaran_by_id_user();
+            $data['order'] = $this->DashboardModel->get_order_by_id_user(); 
+            $data['total_pengunjung'] = $this->DashboardModel->get_total_pengunjung();
+            $data['total_komentar'] = $this->DashboardModel->get_total_komentar();
+            $data['total_mingguan'] = $this->DashboardModel->get_total_pengunjung_mingguan();
+            $data['komentar'] = $this->DashboardModel->get_all_komen();
+            $data['pengunjung'] = $this->DashboardModel->get_all_pengunjung();
+            $data['testimoni'] = $this->DashboardModel->get_testi_by_id_user();
+            $data['setting'] = $this->DashboardModel->get_setting();
+            $data['setting_bayar'] = $this->DashboardModel->get_setting_bayar();
+            $data['data'] = $this->DashboardModel->get_data_by_id_user();
         
-        //     return view('base/dashboard/layout', $data);
-        // }else{
-        //     return redirect()->to(base_url('login'));
-        // }
+            return view('base/dashboard/layout', $data);
+        }else{
+            return redirect()->to(base_url('login'));
+        }
         
         
         // echo $_SESSION['id'];
