@@ -82,20 +82,20 @@ define('SITE_NAME', 'Undesia'); ///NAMA WEBSITE
 // =========== production mode ============
 // //LINK DOMAIN WITH URL
 define('SITE_UTAMA', 'https://undesia.com/'); 
-define('SITE_UNDANGAN', 'https://undangan.digitalku.online/');
-define('SITE_ADMIN', 'https://admin.digitalku.online/');
-define('SITE_BUKUTAMU', 'https://bukutamu.digitalku.online/');
+define('SITE_UNDANGAN', 'https://undangan.undesia.com/');
+define('SITE_ADMIN', 'https://admin.undesia.com/');
+define('SITE_BUKUTAMU', 'https://bukutamu.undesia.com/');
 // define('SITE_UTAMA', 'https://undesia.com/'); 
-// define('SITE_UNDANGAN', 'https://undangan.digitalku.online/');
-// define('SITE_ADMIN', 'https://admin.digitalku.online/');
-// define('SITE_BUKUTAMU', 'https://bukutamu.digitalku.online/');
+// define('SITE_UNDANGAN', 'https://undangan.undesia.com/');
+// define('SITE_ADMIN', 'https://admin.undesia.com/');
+// define('SITE_BUKUTAMU', 'https://bukutamu.undesia.com/');
 
 //DOMAIN ONLY
-define('DOMAIN_UTAMA', 'digitalku.online');
-define('DOMAIN_UTAMA_WWW', 'www.digitalku.online'); //PAKE WWW
-define('DOMAIN_UNDANGAN', 'undangan.digitalku.online');
-define('DOMAIN_ADMIN', 'admin.digitalku.online');
-define('DOMAIN_BUKUTAMU', 'bukutamu.digitalku.online');
+define('DOMAIN_UTAMA', 'undesia.com');
+define('DOMAIN_UTAMA_WWW', 'www.undesia.com'); //PAKE WWW
+define('DOMAIN_UNDANGAN', 'undangan.undesia.com');
+define('DOMAIN_ADMIN', 'admin.undesia.com');
+define('DOMAIN_BUKUTAMU', 'bukutamu.undesia.com');
 
 //base url dinamis
 $base = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']) : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']);
