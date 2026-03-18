@@ -1459,59 +1459,76 @@ Balas *OK* agar bisa diklik Link Undangan';
 
     public function token()
     {
-        foreach ($this->DashboardModel->get_setting_bayar() as $row) {
-            $url = $row->url_midtrans;
-            $server = $row->serverkey_midtrans;
-            $client = $row->clientkey_midtrans;
-            $production = $row->midtrans_production;
+        // Ambil setting (ambil 1 saja)
+        $setting = $this->DashboardModel->get_setting_bayar();
+        if (!$setting) {
+            return $this->response->setJSON(['error' => 'Setting Midtrans tidak ditemukan']);
         }
-        \Midtrans\Config::$serverKey = $server;
-        if ($production == 'true') {
-            \Midtrans\Config::$isProduction = true;
-        } else {
-            \Midtrans\Config::$isProduction = false;
-        }
+
+        $row = $setting[0];
+
+        \Midtrans\Config::$serverKey = $row->serverkey_midtrans;
+        \Midtrans\Config::$isProduction = ($row->midtrans_production === 'true');
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
+
+        // Ambil order (WAJIB 1 data)
         $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
-        foreach ($ordernya as $order) {
 
-            $order_id = $order->invoice;
-            $harga = $order->harga;
-            $email = $order->email;
-            $hp = $order->hp;
+        if (!$ordernya || empty($ordernya)) {
+            return $this->response->setJSON(['error' => 'Order tidak ditemukan']);
         }
-        // Required
-        $transaction_details = array(
-            'order_id' => $order_id,
-            'gross_amount' => $harga // no decimal allowed for creditcard
-        );
-        $customer_details = array(
-            'email'         => $email,
-            'phone'         => $hp
-        );
-        $time = time();
 
-        $custom_expiry = array(
-            'start_time' => date("Y-m-d H:i:s O", $time),
-            'unit' => 'hour',
-            'duration'  => 1
-        );
-        // Data yang akan dikirim untuk request redirect_url.
-        $credit_card['secure'] = true;
-        //ser save_card true to enable oneclick or 2click
-        //$credit_card['save_card'] = true;
-      
-        $transaction_data = array(
+        // Ambil order pertama
+        $order = $ordernya[0];
+
+        // Pastikan data valid
+        if (!$order->invoice || !$order->harga) {
+            return $this->response->setJSON(['error' => 'Data order tidak valid']);
+        }
+
+        // ⚠️ JANGAN DIUBAH-UBAH (harus konsisten)
+        $order_id = $order->invoice;
+
+        $transaction_details = [
+            'order_id' => $order_id,
+            'gross_amount' => (int)$order->harga
+        ];
+
+        $customer_details = [
+            'email' => $order->email,
+            'phone' => $order->hp
+        ];
+
+        // 👉 SEMENTARA: matikan expiry dulu biar tidak error
+        /*
+    $custom_expiry = [
+        'start_time' => date("Y-m-d H:i:s O"),
+        'unit' => 'hour',
+        'duration' => 1
+    ];
+    */
+
+        $transaction_data = [
             'transaction_details' => $transaction_details,
-            'customer_details'       => $customer_details,
-            'credit_card'        => $credit_card,
-            'expiry'             => $custom_expiry
-        );
+            'customer_details' => $customer_details,
+            'credit_card' => ['secure' => true],
+            // 'expiry' => $custom_expiry
+        ];
+
         error_log(json_encode($transaction_data));
-        // return "sdfsdfsdfsdf";
-        $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
-        echo $snapToken;
+
+        try {
+            $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
+
+            return $this->response->setJSON([
+                'token' => $snapToken
+            ]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'error' => $e->getMessage()
+            ]);
+        }
     }
     public function attemptOrder()
     {
