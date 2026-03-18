@@ -32,18 +32,18 @@ class Beranda extends Controller
 	public function index()
 	{
 	    //mengambil semua data themes dari BerandaModel
-		$data['tema'] = $this->BerandaModel->get_all_themes();
-		$data['tema_video'] = $this->BerandaModel->get_all_themes_video();
-		$data['setting'] = $this->BerandaModel->get_setting();
-        $data['testimoni'] = $this->BerandaModel->get_testimoni();
-        $data['total_testi'] = $this->BerandaModel->get_total_testimoni();
-        $data['total_users'] = $this->BerandaModel->get_total_pengguna();
-        $data['total_tema'] = $this->BerandaModel->get_total_tema();
-        $data['paket'] = $this->BerandaModel->get_paket();
-        $data['title'] = 'Beranda';
-		//load view home
-		$data['view'] = 'base/beranda/home';
-		return view('base/beranda/layout', $data);
+		// $data['tema'] = $this->BerandaModel->get_all_themes();
+		// $data['tema_video'] = $this->BerandaModel->get_all_themes_video();
+		// $data['setting'] = $this->BerandaModel->get_setting();
+        // $data['testimoni'] = $this->BerandaModel->get_testimoni();
+        // $data['total_testi'] = $this->BerandaModel->get_total_testimoni();
+        // $data['total_users'] = $this->BerandaModel->get_total_pengguna();
+        // $data['total_tema'] = $this->BerandaModel->get_total_tema();
+        // $data['paket'] = $this->BerandaModel->get_paket();
+        // $data['title'] = 'Beranda';
+		// //load view home
+		// $data['view'] = 'base/beranda/home';
+		// return view('base/beranda/layout', $data);
 	}
 
 	 public function themes()
