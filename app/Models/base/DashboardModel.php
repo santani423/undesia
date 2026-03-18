@@ -385,6 +385,7 @@ class DashboardModel extends Model
     }
 
     public function get_pembayaran_by_id_user(){
+        return "ini pembayaran";
         $builder = $this->pembayaran;
         $builder->select('pembayaran.*, users.*, pembayaran.created_at as tglBayar');
         $builder->join('users', 'pembayaran.id_user = users.id');
