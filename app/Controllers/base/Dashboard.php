@@ -1491,13 +1491,12 @@ Balas *OK* agar bisa diklik Link Undangan';
             'phone'         => $hp
         );
         $time = time();
-      
+
         $custom_expiry = array(
             'start_time' => date("Y-m-d H:i:s O", $time),
             'unit' => 'hour',
             'duration'  => 1
         );
-        return $custom_expiry;
         // Data yang akan dikirim untuk request redirect_url.
         $credit_card['secure'] = true;
         //ser save_card true to enable oneclick or 2click
@@ -1511,6 +1510,7 @@ Balas *OK* agar bisa diklik Link Undangan';
         error_log(json_encode($transaction_data));
 
         $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
+        return $snapToken;
         echo $snapToken;
     }
     public function attemptOrder()
