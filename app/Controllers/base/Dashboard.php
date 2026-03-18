@@ -1465,13 +1465,13 @@ Balas *OK* agar bisa diklik Link Undangan';
             $client = $row->clientkey_midtrans;
             $production = $row->midtrans_production;
         }
-        return "ok";
         \Midtrans\Config::$serverKey = $server;
         if ($production == 'true') {
             \Midtrans\Config::$isProduction = true;
         } else {
             \Midtrans\Config::$isProduction = false;
         }
+        return "ok";
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
         $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
