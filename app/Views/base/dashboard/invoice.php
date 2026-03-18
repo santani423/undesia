@@ -117,7 +117,7 @@
                             if($metode_bayar == 'manual') {?>
                         <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalKonfirmasi">Konfirmasi</button>
                         <?php }else if ($metode_bayar == 'midtrans'){ ?>
-                        <button class="btn btn-primary btn-block" id="pay-button">Pembayaran</button>
+                        <button class="btn btn-primary btn-block" id="pay-button">Pembayaran bbbb</button>
                     <?php } else{ ?>
                         <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalTripay">Pembayaran Tagihan</button>
                     <?php }
