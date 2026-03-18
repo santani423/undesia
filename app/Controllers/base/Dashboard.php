@@ -1509,7 +1509,7 @@ Balas *OK* agar bisa diklik Link Undangan';
             'expiry'             => $custom_expiry
         );
         error_log(json_encode($transaction_data));
-        return "sdfsdfsdfsdf";
+        // return "sdfsdfsdfsdf";
         $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
         echo $snapToken;
     }
