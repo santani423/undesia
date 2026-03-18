@@ -1475,7 +1475,7 @@ Balas *OK* agar bisa diklik Link Undangan';
         \Midtrans\Config::$is3ds = true;
         $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
         foreach ($ordernya as $order) {
-           
+
             $order_id = $order->invoice;
             $harga = $order->harga;
             $email = $order->email;
@@ -1491,13 +1491,13 @@ Balas *OK* agar bisa diklik Link Undangan';
             'phone'         => $hp
         );
         $time = time();
-        return "ini";
-        return $time;
+      
         $custom_expiry = array(
             'start_time' => date("Y-m-d H:i:s O", $time),
             'unit' => 'hour',
             'duration'  => 1
         );
+        return $custom_expiry;
         // Data yang akan dikirim untuk request redirect_url.
         $credit_card['secure'] = true;
         //ser save_card true to enable oneclick or 2click
