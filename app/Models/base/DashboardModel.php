@@ -385,8 +385,8 @@ class DashboardModel extends Model
     }
 
     public function get_pembayaran_by_id_user(){
-        return "ini pembayaran";
         $builder = $this->pembayaran;
+        return $_SESSION['id'];
         $builder->select('pembayaran.*, users.*, pembayaran.created_at as tglBayar');
         $builder->join('users', 'pembayaran.id_user = users.id');
         $where = "pembayaran.id_user=".$_SESSION['id']." AND pembayaran.status_order = '1' " ;
