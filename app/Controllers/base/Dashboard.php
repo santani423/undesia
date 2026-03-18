@@ -1507,8 +1507,8 @@ Balas *OK* agar bisa diklik Link Undangan';
             'credit_card'        => $credit_card,
             'expiry'             => $custom_expiry
         );
-        return json_encode($transaction_data);
         error_log(json_encode($transaction_data));
+        return "dsdfsdfsdfsdfsdf";
 
         $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
         echo $snapToken;
