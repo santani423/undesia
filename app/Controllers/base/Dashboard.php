@@ -1501,6 +1501,7 @@ Balas *OK* agar bisa diklik Link Undangan';
         $credit_card['secure'] = true;
         //ser save_card true to enable oneclick or 2click
         //$credit_card['save_card'] = true;
+      
         $transaction_data = array(
             'transaction_details' => $transaction_details,
             'customer_details'       => $customer_details,
@@ -1508,9 +1509,8 @@ Balas *OK* agar bisa diklik Link Undangan';
             'expiry'             => $custom_expiry
         );
         error_log(json_encode($transaction_data));
-        
+
         $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
-    
         echo $snapToken;
     }
     public function attemptOrder()
