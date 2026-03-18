@@ -1459,10 +1459,14 @@ Balas *OK* agar bisa diklik Link Undangan';
 
     public function token()
     {
-        // Ambil setting (ambil 1 saja)
+        // ======================
+        // 1. Ambil setting
+        // ======================
         $setting = $this->DashboardModel->get_setting_bayar();
-        if (!$setting) {
-            return $this->response->setJSON(['error' => 'Setting Midtrans tidak ditemukan']);
+
+        if (!$setting || empty($setting)) {
+            echo json_encode(['error' => 'Setting Midtrans tidak ditemukan']);
+            return;
         }
 
         $row = $setting[0];
@@ -1472,60 +1476,72 @@ Balas *OK* agar bisa diklik Link Undangan';
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
 
-        // Ambil order (WAJIB 1 data)
+        // ======================
+        // 2. Ambil order user
+        // ======================
         $ordernya = $this->DashboardModel->get_pembayaran_by_id_user();
 
         if (!$ordernya || empty($ordernya)) {
-            return $this->response->setJSON(['error' => 'Order tidak ditemukan']);
+            echo json_encode(['error' => 'Order tidak ditemukan']);
+            return;
         }
 
-        // Ambil order pertama
+        // ⚠️ Ambil 1 order saja (jangan foreach)
         $order = $ordernya[0];
 
-        // Pastikan data valid
-        if (!$order->invoice || !$order->harga) {
-            return $this->response->setJSON(['error' => 'Data order tidak valid']);
+        // ======================
+        // 3. Validasi data
+        // ======================
+        if (empty($order->invoice) || empty($order->harga)) {
+            echo json_encode(['error' => 'Data order tidak valid']);
+            return;
         }
 
-        // ⚠️ JANGAN DIUBAH-UBAH (harus konsisten)
-        $order_id = $order->invoice;
+        // ⚠️ WAJIB STABIL (jangan diubah-ubah)
+        $order_id = (string)$order->invoice;
 
+        // ======================
+        // 4. Siapkan data transaksi
+        // ======================
         $transaction_details = [
             'order_id' => $order_id,
             'gross_amount' => (int)$order->harga
         ];
 
         $customer_details = [
-            'email' => $order->email,
-            'phone' => $order->hp
+            'email' => $order->email ?? '',
+            'phone' => $order->hp ?? ''
         ];
 
-        // 👉 SEMENTARA: matikan expiry dulu biar tidak error
-        /*
-    $custom_expiry = [
-        'start_time' => date("Y-m-d H:i:s O"),
-        'unit' => 'hour',
-        'duration' => 1
-    ];
-    */
+        // ⚠️ Nonaktifkan expiry dulu (hindari error)
+        // nanti bisa diaktifkan lagi kalau sudah stabil
 
         $transaction_data = [
             'transaction_details' => $transaction_details,
             'customer_details' => $customer_details,
-            'credit_card' => ['secure' => true],
-            // 'expiry' => $custom_expiry
+            'credit_card' => [
+                'secure' => true
+            ]
         ];
 
+        // ======================
+        // 5. Debug log
+        // ======================
         error_log(json_encode($transaction_data));
 
+        // ======================
+        // 6. Generate token
+        // ======================
         try {
             $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
 
-            return $this->response->setJSON([
-                'token' => $snapToken
+            // output JSON biar gampang dipakai JS
+            echo json_encode([
+                'token' => $snapToken,
+                'order_id' => $order_id
             ]);
         } catch (\Exception $e) {
-            return $this->response->setJSON([
+            echo json_encode([
                 'error' => $e->getMessage()
             ]);
         }
