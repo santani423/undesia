@@ -44,6 +44,7 @@ class Beranda extends Controller
 		// //load view home
 		// $data['view'] = 'base/beranda/home';
 		// return view('base/beranda/layout', $data);
+		return view('base/beranda/layout/index');
 	}
 
 	 public function themes()
