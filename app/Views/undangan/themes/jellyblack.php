@@ -463,9 +463,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+// Fungsi untuk generate QRCode setiap kali modal dibuka
+function generateQRCode() {
 	var kode = <?=json_encode($qrcode)?>;
-	// Pastikan elemen qrcode kosong sebelum generate baru
 	var qrContainer = document.getElementById('qrcode');
 	if (qrContainer) {
 		qrContainer.innerHTML = '';
@@ -478,6 +478,12 @@ document.addEventListener('DOMContentLoaded', function() {
 			correctLevel : QRCode.CorrectLevel.H
 		});
 	}
+}
+// Trigger generate QRCode setiap kali modal sw-qrcode ditampilkan
+$(document).ready(function() {
+	$('#sw-qrcode').on('shown.bs.modal', function () {
+		generateQRCode();
+	});
 });
 </script>
 	<script type="text/javascript">
