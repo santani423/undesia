@@ -462,17 +462,22 @@
 	<script src="<?php echo base_url() ?>/assets/themes/floral/themes-rsvp/sw-vendor/js/sw-main.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/floral/themes-rsvp/sw-vendor/js/moment-with-locales.js"></script>
 	<script>var base_url = '<?php echo base_url() ?>';</script>
-<script src="<?php echo base_url() ?>/assets/themes/floral/themes-rsvp/sw-vendor/js/jquery.classyqr.js"></script>
+<script src="<?php echo base_url() ?>/assets/themes/floral/themes-rsvp/sw-vendor/js/qrcode.min.js"></script>
 <script>
 $(document).ready(function() {
-    var kode = <?=json_encode($qrcode)?>;
-    $('#qrcode').ClassyQR({
-       create:true,
-       type:'text',
-       text: kode
-      });
+	var kode = <?=json_encode($qrcode)?>;
+	// Hapus isi qrcode jika ada
+	document.getElementById('qrcode').innerHTML = '';
+	// Generate QR code pakai qrcodejs
+	new QRCode(document.getElementById('qrcode'), {
+		text: kode,
+		width: 180,
+		height: 180,
+		colorDark : "#000000",
+		colorLight : "#ffffff",
+		correctLevel : QRCode.CorrectLevel.H
+	});
 });
-    
 </script>
 	<script type="text/javascript">
 	function copyText(element) {
