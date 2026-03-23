@@ -37,12 +37,12 @@
                       <tr>
                         <td><?= $row->nama_tamu ?></td>
                         <td><?= $row->alamat_tamu ?></td>
-                        <td><a href="<?= SITE_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->id_tamu ?>" target="_blank"><?= DOMAIN_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->id_tamu ?></a></td>
+                        <td><a href="<?= SITE_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->nama_slug ?>" target="_blank"><?= DOMAIN_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->nama_slug ?></a></td>
                         <td><?= $row->waktu_hadir ?></td>
                         <td><img src="<?php echo base_url() ?>/assets/users/<?=$kunci?>/<?=$qrcode?>.png" height="120" width="160"></td>
                         <td>
                             <button 
-                            data-id="<?= $row->id_tamu?>" 
+                            data-id="<?= $row->nama_slug?>" 
                             class="btn btn-sm btn-danger hapus" data-toggle="modal" data-target="#modalHapus">Hapus</button>
                         </td>
                       </tr>
