@@ -49,8 +49,16 @@ class UndanganModel extends Model
     }
     public function cek_tamu($id_user, $id_tamu)
     {
-    $where = "id_tamu = ".$id_tamu." AND id_user=".$id_user;
+        $where = "id_tamu = ".$id_tamu." AND id_user=".$id_user;
         return $this->tamu->where($where)->get();
+    }
+
+    // Tambahan: ambil tamu berdasarkan nama_slug dan id_user
+    public function get_tamu_by_slug($id_user, $nama_slug){
+        return $this->tamu->where(['id_user' => $id_user, 'nama_slug' => $nama_slug])->get();
+    }
+    public function cek_tamu_by_slug($id_user, $nama_slug){
+        return $this->tamu->where(['id_user' => $id_user, 'nama_slug' => $nama_slug])->get();
     }
 
     //mengambil data mempelai sesuai dengan data(id_user) yang dikirim
