@@ -53,10 +53,10 @@
                         <td><?= $row->tgl_kirim ?></td>
                         <td><?= $row->status_kirim ?></td>
                         <td>
-                            <?php if ($paket[0]->kirim_whatsapp == 1){ ?>
+                            <!-- <?php if ($paket[0]->kirim_whatsapp == 1){ ?>
                             <button 
                             data-id="<?= $row->id_tamu?>" 
-                            class="btn btn-sm btn-success kirim" data-toggle="modal" data-target="#modalKirim">Kirim</button><?php } ?>
+                            class="btn btn-sm btn-success kirim" data-toggle="modal" data-target="#modalKirim">Kirim</button><?php } ?> -->
                             <button 
                             data-id="<?= $row->id_tamu?>" 
                             data-nama="<?= $row->nama_tamu?>" 
