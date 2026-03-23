@@ -388,8 +388,8 @@
             </div>
             <div class="modal-body">
                 <div class="social-share text-center">
-					<center></center>
-                    <span id="qrcode"></span>
+					<center>
+                    <span id="qrcode"></span></center>
                 </div>
             </div>
         </div>
