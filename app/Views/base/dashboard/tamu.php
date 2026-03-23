@@ -46,26 +46,26 @@
                     foreach($tamu as $row){ 
                     ?>
                       <tr>
-                        <td><input type="checkbox" class="centangTamu" name="idTamu[]" value="<?= $row->id_tamu ?>"></td> 
+                        <td><input type="checkbox" class="centangTamu" name="idTamu[]" value="<?= $row->nama_slug ?>"></td> 
                         <td><?= $row->nama_tamu ?></td>
                         <td><?= $row->no_wa ?></td>
-                        <td><a href="<?= SITE_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->id_tamu ?>" target="_blank"><?= DOMAIN_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->nama_slug ?></a></td>
+                        <td><a href="<?= SITE_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->nama_slug ?>" target="_blank"><?= DOMAIN_UNDANGAN ?>/<?= $row->domain ?>/<?= $row->nama_slug ?></a></td>
                         <td><?= $row->tgl_kirim ?></td>
                         <td><?= $row->status_kirim ?></td>
                         <td>
                             <!-- <?php if ($paket[0]->kirim_whatsapp == 1){ ?>
                             <button 
-                            data-id="<?= $row->id_tamu?>" 
+                            data-id="<?= $row->nama_slug?>" 
                             class="btn btn-sm btn-success kirim" data-toggle="modal" data-target="#modalKirim">Kirim</button><?php } ?> -->
                             <button 
-                            data-id="<?= $row->id_tamu?>" 
+                            data-id="<?= $row->nama_slug?>" 
                             data-nama="<?= $row->nama_tamu?>" 
                             data-alamat="<?= $row->alamat_tamu?>" 
                             data-no="<?= $row->no_wa?>" 
                             data-tgl="<?= $row->tgl_kirim?>" 
                             class="btn btn-sm btn-primary edit" data-toggle="modal" data-target="#modalEdit">Edit</button>
                             <button 
-                            data-id="<?= $row->id_tamu?>" 
+                            data-id="<?= $row->nama_slug?>" 
                             class="btn btn-sm btn-danger hapus" data-toggle="modal" data-target="#modalHapus">Hapus</button>
                         </td>
                       </tr>
@@ -296,12 +296,12 @@ $(document).ready(function () {
 
     $('#hapusBtn').on('click', function(event) {
 
-        var id_tamu = $('#idTamu').val();
+        var nama_slug = $('#idTamu').val();
 
         $.ajax({
             url : "<?= base_url('user/hapus_tamu') ?>",
             method : "POST",
-            data : {id_tamu: id_tamu},
+            data : {nama_slug: nama_slug},
             async : true,
             dataType : 'html',
             success: function(result){
@@ -319,12 +319,12 @@ $(document).ready(function () {
 
     $('#kirimBtn').on('click', function(event) {
 
-        var id_tamu = $('#idTamu').val();
+        var nama_slug = $('#idTamu').val();
 
         $.ajax({
             url : "<?= base_url('user/kirim_undangan') ?>",
             method : "POST",
-            data : {id_tamu: id_tamu},
+            data : {nama_slug: nama_slug},
             async : true,
             dataType : 'html',
             success: function(result){
@@ -355,7 +355,7 @@ $('.edit').on('click', function (event) {
     });
 $('#editBtn').on('click', function(event) {
 
-var id_tamu = $('#idTamunya').val();
+var nama_slug = $('#idTamunya').val();
 var nama_tamu = $('#namaTamu').val();
 var alamat_tamu = $('#alamatTamu').val();
 var no_wa = $('#noWa').val();
@@ -364,7 +364,7 @@ var tgl_kirim = $('#tglKirim').val();
 $.ajax({
     url : "<?= base_url('user/update_tamu') ?>",
     method : "POST",
-    data : {id_tamu: id_tamu, nama_tamu:nama_tamu, alamat_tamu:alamat_tamu, no_wa: no_wa, tgl_kirim: tgl_kirim},
+    data : {nama_slug: nama_slug, nama_tamu:nama_tamu, alamat_tamu:alamat_tamu, no_wa: no_wa, tgl_kirim: tgl_kirim},
     async : true,
     dataType : 'html',
     success: function(result){
