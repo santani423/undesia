@@ -484,14 +484,15 @@
 // 	}
 // }
  function generateQRCode() {
-    //   const text = document.getElementById("text").value;
+      const text = <?=json_encode($qrcode)?>;
       const container = document.getElementById("qrcode");
 
       container.innerHTML = "";
- 
+		console.log("text",text);
+		
 
       new QRCode(container, {
-        text: "666666",
+        text: text,
         width: 200,
         height: 200
       });
