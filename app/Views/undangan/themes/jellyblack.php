@@ -460,21 +460,16 @@
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/sw-main.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/moment-with-locales.js"></script>
 <script>var base_url = '<?php echo base_url() ?>';</script>
-<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/qrcode.min.js"></script>
+<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquery.classyqr.js"></script>
 <script>
 $(document).ready(function() {
-	var kode = <?=json_encode($qrcode)?>;
-	// Hapus isi #qrcode jika ada
-	$('#qrcode').empty();
-	// Generate QR menggunakan qrcodejs
-	var qrcode = new QRCode(document.getElementById("qrcode"), {
-		text: kode,
-		width: 230,
-		height: 230,
-		colorDark : "#000000",
-		colorLight : "#ffffff",
-		correctLevel : QRCode.CorrectLevel.H
-	});
+var kode = <?=json_encode($qrcode)?>;
+$('#qrcode').ClassyQR({
+   create:true,
+   type:'text',
+   text: kode
+  });
+
 });
 </script>
 	<script type="text/javascript">
