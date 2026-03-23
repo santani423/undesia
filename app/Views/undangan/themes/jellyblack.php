@@ -384,10 +384,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">QrCode Tamu ddd</h4>
+                <h4 class="modal-title" id="myModalLabel">QrCode Tamu</h4>
             </div>
             <div class="modal-body">
                 <div class="social-share text-center">
+					<center></center>
                     <span id="qrcode"></span>
                 </div>
             </div>
