@@ -473,6 +473,8 @@ function generateQRCode() {
 	var qrContainer = document.getElementById('qrcode');
 	if (qrContainer) {
 		qrContainer.innerHTML = '';
+		console.log("generateQRCode called with kode:", kode);
+		
 		new QRCode(qrContainer, {
 			text: kode,
 			width: 200,
