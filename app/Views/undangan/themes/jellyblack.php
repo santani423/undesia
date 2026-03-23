@@ -319,7 +319,7 @@
             <a id="sw-nav-next" href="#" class="sw-custom-icon sw-custom-icon-arrow-right">Next</a>
             <a href="#" class="sw-custom-icon sw-custom-icon-share" data-toggle="modal" data-target="#sw-share" title="Bagikan">Share</a>
             <?php foreach ($rules->getResult() as $set){ 
-			if($set->qrcode == 1 && $order[0]->buku_tamu == 1) { ?>
+			if($set->qrcode == 1 && $order[0]->buku_tamu == 1 && $qrcode != 'Tidak Ada Qrcode') { ?>
             <a href="#" class="sw-custom-icon sw-custom-icon-qrcode" data-toggle="modal" data-target="#sw-qrcode" title="QrCode">QrCode</a>
             <?php } 
             if($set->hadiah == 1 && $order[0]->kirim_hadiah == 1) { ?>
@@ -387,9 +387,18 @@
                 <h4 class="modal-title" id="myModalLabel">QrCode Tamu</h4>
             </div>
             <div class="modal-body">
-                <div class="social-share text-center">
-					<center>
-                    <span id="qrcode"></span></center>
+				<div class="social-share text-center">
+					<span id="qrcode"></span>
+				</style>
+				<style>
+				#sw-qrcode #qrcode {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					min-height: 220px;
+				}
+				</style>
                 </div>
             </div>
         </div>
