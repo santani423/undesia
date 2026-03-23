@@ -99,7 +99,7 @@ class Undangan extends Controller
 					$data['qrcode'] = 'Tidak Ada Qrcode inilahkan hubungi panitia';
 				}
 			} else {
-				$nama_tamu = 'Tamu Undangan';
+				$nama_tamu = 'Tamu Undangan';	
 				$alamat_tamu = 'Di Tempat';
 				$data['invite'] = $nama_tamu;
 				$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
