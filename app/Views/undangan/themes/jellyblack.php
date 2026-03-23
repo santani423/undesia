@@ -44,6 +44,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquery.countdown.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+	
+  <!-- QR Generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- QR Scanner -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 
 <body oncontextmenu="return false">
@@ -389,6 +396,7 @@
             <div class="modal-body">
                 <div class="social-share text-center">
                     <span id="qrcode"></span>
+                    <span id="qrcode2"></span>
                 </div>
             </div>
         </div>
@@ -452,6 +460,93 @@
         </div>
     </div>
 </div>
+  <script>
+    let html5QrCode;
+    let currentCameraId = null;
+	$(document).ready(function() {
+ 
+generateQR()
+});
+
+    function generateQR() {
+      const text = document.getElementById("text").value;
+      const container = document.getElementById("qrcode");
+
+      container.innerHTML = "";
+
+      if (!text) {
+        alert("Masukkan teks dulu!");
+        return;
+      }
+
+      new QRCode(container, {
+        text: '99999',
+        width: 200,
+        height: 200
+      });
+    }
+
+    function startScanner(cameraId) {
+      if (html5QrCode) {
+        html5QrCode.stop().then(() => {
+          runScanner(cameraId);
+        });
+      } else {
+        runScanner(cameraId);
+      }
+    }
+
+    function runScanner(cameraId) {
+      html5QrCode = new Html5Qrcode("reader");
+      currentCameraId = cameraId;
+
+      html5QrCode.start(
+        cameraId,
+        {
+          fps: 10,
+          qrbox: 250
+        },
+        (decodedText) => {
+          document.getElementById("result").value = decodedText;
+        },
+        (error) => {}
+      );
+    }
+
+    function loadCameras() {
+      Html5Qrcode.getCameras().then(devices => {
+        const select = document.getElementById("cameraSelect");
+
+        devices.forEach(device => {
+          const option = document.createElement("option");
+          option.value = device.id;
+          option.text = device.label || `Camera ${select.length + 1}`;
+          select.appendChild(option);
+        });
+
+        // AUTO PILIH KAMERA BELAKANG (biasanya index terakhir di HP)
+        if (devices.length > 1) {
+          startScanner(devices[devices.length - 1].id);
+          select.value = devices[devices.length - 1].id;
+        } else if (devices.length === 1) {
+          startScanner(devices[0].id);
+        }
+
+        // EVENT GANTI KAMERA
+        select.addEventListener("change", function () {
+          startScanner(this.value);
+        });
+
+      }).catch(err => {
+        console.error(err);
+        alert("Tidak bisa akses kamera");
+      });
+    }
+
+    window.onload = function () {
+      loadCameras();
+    };
+  </script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/modernizr.custom.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquerypp.custom.js"></script>
