@@ -39,7 +39,10 @@
     <script src="<?= base_url('assets/dashboard'); ?>/vendor/jquery/jquery.min.js"></script>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <!-- Ganti ke qrcodejs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Tambahkan jsQR untuk scan QR code -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css">
@@ -274,86 +277,74 @@ $.ajax({
 <script>
 
 $(document).ready(function () {
-const qrcode = window.qrcode;
-const video = document.createElement("video");
-const canvasElement = document.getElementById("qr-canvas");
-const canvas = canvasElement.getContext("2d");
-const qrResult = document.getElementById("qr-result");
-const outputData = document.getElementById("outputData");
-const btnScanQR = document.getElementById("btn-scan-qr");
-let scanning = false;
+  const qrResult = document.getElementById("qr-result");
+  const outputData = document.getElementById("outputData");
+  const btnScanQR = document.getElementById("btn-scan-qr");
+  const canvasElement = document.getElementById("qr-canvas");
+  const canvas = canvasElement.getContext("2d");
+  let videoStream = null;
+  let scanning = false;
 
-qrcode.callback = res => {
-  if (res) {
-    $("#outputData").val(res);
-    scanning = false;
-
-    video.srcObject.getTracks().forEach(track => {
-      track.stop();
-    });
-
-    qrResult.hidden = false;
-    canvasElement.hidden = true;
-    btnScanQR.hidden = false;
-    document.getElementById('outputData').focus();
-    Webcam.set({
-            width: 187,
-            height: 140,
-            dest_width: 187, // device capture size
-    dest_height: 140,
-    crop_width: 187, // final cropped size
-    crop_height: 140,
-            image_format: 'jpg',
-            jpeg_quality: 100
-        });
-        Webcam.attach('#camera');
-        document.getElementById('btn-capture').hidden = true;
-        document.getElementById('webcam').style.display = '';
-        document.getElementById('webcam').hidden = false;
-        document.getElementById('camera').style.display = '';
-        document.getElementById('camera').hidden = false;
-        
-  }
-};
-
-btnScanQR.onclick = () => {
-  navigator.mediaDevices
-    .getUserMedia({ video: { facingMode: "environment" } })
-    .then(function(stream) {
+  btnScanQR.onclick = function() {
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+      videoStream = stream;
       scanning = true;
-      qrResult.hidden = false;
       btnScanQR.hidden = true;
       canvasElement.hidden = false;
-      Webcam.unfreeze();
+      qrResult.hidden = false;
       document.getElementById('simpan').style.display = 'none';
       document.getElementById('btn-capture').hidden = false;
       document.getElementById('camera').style.display = 'none';
       document.getElementById('webcam').hidden = true;
       document.getElementById('camera').hidden = true;
-      
-      video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+
+      const video = document.createElement("video");
+      video.setAttribute("playsinline", true);
       video.srcObject = stream;
       video.play();
-      tick();
-      scan();
+
+      function tick() {
+        if (!scanning) return;
+        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+          canvasElement.height = video.videoHeight;
+          canvasElement.width = video.videoWidth;
+          canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+          try {
+            const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height);
+            if (code) {
+              scanning = false;
+              outputData.value = code.data;
+              videoStream.getTracks().forEach(track => track.stop());
+              btnScanQR.hidden = false;
+              canvasElement.hidden = true;
+              qrResult.hidden = false;
+              document.getElementById('outputData').focus();
+              // Tampilkan kamera selfie setelah scan QR
+              Webcam.set({
+                width: 187,
+                height: 140,
+                dest_width: 187,
+                dest_height: 140,
+                crop_width: 187,
+                crop_height: 140,
+                image_format: 'jpg',
+                jpeg_quality: 100
+              });
+              Webcam.attach('#camera');
+              document.getElementById('btn-capture').hidden = true;
+              document.getElementById('webcam').style.display = '';
+              document.getElementById('webcam').hidden = false;
+              document.getElementById('camera').style.display = '';
+              document.getElementById('camera').hidden = false;
+            }
+          } catch (e) {}
+        }
+        if (scanning) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     });
-};
-
-function tick() {
-  canvasElement.height = video.videoHeight;
-  canvasElement.width = video.videoWidth;
-  canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-
-  scanning && requestAnimationFrame(tick);
-}
-
-function scan() {
-  try {
-    qrcode.decode();
-  } catch (e) {
-    setTimeout(scan, 300);
-  }
-}
+  };
 });
 </script>
 
