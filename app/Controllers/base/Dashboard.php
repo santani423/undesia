@@ -1083,7 +1083,7 @@ class Dashboard extends Controller
 
         // SLUG + KODE UNIK
         $slug_base = url_title($nama_tamu_clean, '-', TRUE);
-        $data['nama_slug'] = $slug_base . '-' . $unique_code;
+        $data['nama_slug'] = $slug_base;
 
         $data['id_user'] = $this->request->getPost('id_user');
         $data['alamat_tamu'] = ucwords($this->request->getPost('alamat_tamu'));
