@@ -45,11 +45,11 @@ class UndanganModel extends Model
         return $this->order->where('domain', $domain)->get();
     }
     public function get_tamu($id){
-        return $this->tamu->where('nama_slug', $id)->get();
+        return $this->tamu->where('id_tamu', $id)->get();
     }
-    public function cek_tamu($id_user, $nama_slug)
+    public function cek_tamu($id_user, $id_tamu)
     {
-    $where = "nama_slug = ".$nama_slug." AND id_user=".$id_user;
+    $where = "id_tamu = ".$id_tamu." AND id_user=".$id_user;
         return $this->tamu->where($where)->get();
     }
 
