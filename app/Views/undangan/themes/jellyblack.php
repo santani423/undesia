@@ -468,31 +468,30 @@
   <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
 // Fungsi untuk generate QRCode setiap kali modal dibuka
-// function generateQRCode() {
-// 	var kode = <?=json_encode($qrcode)?>;
-// 	var qrContainer = document.getElementById('qrcode');
-// 	if (qrContainer) {
-// 		qrContainer.innerHTML = '';
-// 		new QRCode(qrContainer, {
-// 			text: kode,
-// 			width: 200,
-// 			height: 200,
-// 			colorDark : "#000000",
-// 			colorLight : "#ffffff",
-// 			correctLevel : QRCode.CorrectLevel.H
-// 		});
-// 	}
-// }
+function generateQRCode() {
+	var kode = <?=json_encode($qrcode)?>;
+	var qrContainer = document.getElementById('qrcode');
+	if (qrContainer) {
+		qrContainer.innerHTML = '';
+		new QRCode(qrContainer, {
+			text: kode,
+			width: 200,
+			height: 200,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		});
+	}
+}
  function generateQRCode() {
-      const text = <?=json_encode($qrcode)?>;
+    //   const text = document.getElementById("text").value;
       const container = document.getElementById("qrcode");
 
       container.innerHTML = "";
-		console.log("text",text);
-		
+ 
 
       new QRCode(container, {
-        text: text,
+        text: "666666",
         width: 200,
         height: 200
       });
