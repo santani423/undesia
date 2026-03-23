@@ -73,39 +73,39 @@ class Undangan extends Controller
 				$tglDaftar = $row->tglDaftar;
 				$masa_aktif = $row->masa_aktif;
 			}
-			if($this->uri->getTotalSegments() > 2){
-			$invite = $this->uri->getSegment(3); //orang yang diundang disini
-			$tamunya = $this->UndanganModel->get_tamu($invite);
-			$cektamu = $this->UndanganModel->cek_tamu($idnya, $invite);
-			if(!empty($cektamu->getResult())){
-			  foreach ($tamunya->getResult() as $row){ 
-				$nama_tamu= $row->nama_tamu;
-				$alamat_tamu = $row->alamat_tamu;
-				$qrcode = $row->qrcode;
-			  }
-			$data['invite'] = $nama_tamu;
-			$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
-			$data['alamat_tamu'] = $alamat_tamu;
-			$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
-			$data['qrcode'] = $qrcode;
-			}else{
-			$nama_tamu= 'Tamu Undangan';
-			$alamat_tamu = 'Di Tempat';
-			  $data['invite'] = $nama_tamu;
-			$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
-			$data['alamat_tamu'] = $alamat_tamu;
-			$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
-			$data['qrcode'] = 'Tidak Ada Qrcode';
-			}
-			}else{
-			$nama_tamu= 'Tamu Undangan';
-			$alamat_tamu = 'Di Tempat';
-			$data['invite'] = $nama_tamu;
-			$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
-			$data['alamat_tamu'] = $alamat_tamu;
-			$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
-			$data['qrcode'] = 'Tidak Ada Qrcode';
-			}
+						if($this->uri->getTotalSegments() > 2){
+								$invite = $this->uri->getSegment(3); // nama_slug
+								$tamunya = $this->UndanganModel->get_tamu_by_slug($idnya, $invite);
+								$cektamu = $this->UndanganModel->cek_tamu_by_slug($idnya, $invite);
+								if(!empty($cektamu->getResult())){
+										foreach ($tamunya->getResult() as $row){ 
+												$nama_tamu= $row->nama_tamu;
+												$alamat_tamu = $row->alamat_tamu;
+												$qrcode = $row->qrcode;
+										}
+										$data['invite'] = $nama_tamu;
+										$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
+										$data['alamat_tamu'] = $alamat_tamu;
+										$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
+										$data['qrcode'] = $qrcode;
+								}else{
+										$nama_tamu= 'Tamu Undangan';
+										$alamat_tamu = 'Di Tempat';
+										$data['invite'] = $nama_tamu;
+										$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
+										$data['alamat_tamu'] = $alamat_tamu;
+										$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
+										$data['qrcode'] = 'Tidak Ada Qrcode';
+								}
+						}else{
+								$nama_tamu= 'Tamu Undangan';
+								$alamat_tamu = 'Di Tempat';
+								$data['invite'] = $nama_tamu;
+								$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
+								$data['alamat_tamu'] = $alamat_tamu;
+								$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
+								$data['qrcode'] = 'Tidak Ada Qrcode';
+						}
 			
 			//insert traffic to db
 			if($nama_tamu != NULL){
