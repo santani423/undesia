@@ -470,7 +470,7 @@ generateQR()
 
     function generateQR() {
       const text = document.getElementById("text").value;
-      const container = document.getElementById("qrcode");
+      const container = document.getElementById("qrcode2");
 
       container.innerHTML = "";
 
@@ -484,68 +484,7 @@ generateQR()
         width: 200,
         height: 200
       });
-    }
-
-    function startScanner(cameraId) {
-      if (html5QrCode) {
-        html5QrCode.stop().then(() => {
-          runScanner(cameraId);
-        });
-      } else {
-        runScanner(cameraId);
-      }
-    }
-
-    function runScanner(cameraId) {
-      html5QrCode = new Html5Qrcode("reader");
-      currentCameraId = cameraId;
-
-      html5QrCode.start(
-        cameraId,
-        {
-          fps: 10,
-          qrbox: 250
-        },
-        (decodedText) => {
-          document.getElementById("result").value = decodedText;
-        },
-        (error) => {}
-      );
-    }
-
-    function loadCameras() {
-      Html5Qrcode.getCameras().then(devices => {
-        const select = document.getElementById("cameraSelect");
-
-        devices.forEach(device => {
-          const option = document.createElement("option");
-          option.value = device.id;
-          option.text = device.label || `Camera ${select.length + 1}`;
-          select.appendChild(option);
-        });
-
-        // AUTO PILIH KAMERA BELAKANG (biasanya index terakhir di HP)
-        if (devices.length > 1) {
-          startScanner(devices[devices.length - 1].id);
-          select.value = devices[devices.length - 1].id;
-        } else if (devices.length === 1) {
-          startScanner(devices[0].id);
-        }
-
-        // EVENT GANTI KAMERA
-        select.addEventListener("change", function () {
-          startScanner(this.value);
-        });
-
-      }).catch(err => {
-        console.error(err);
-        alert("Tidak bisa akses kamera");
-      });
-    }
-
-    window.onload = function () {
-      loadCameras();
-    };
+    } 
   </script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/modernizr.custom.js"></script>
