@@ -49,8 +49,8 @@ class Beranda extends Controller
 		$data['title'] = 'Beranda';
 		//load view home
 		$data['view'] = 'base/beranda/home';
-		// return view('base/beranda/layout', $data);
-		// return view('base/beranda/layout/index');
+		return view('base/beranda/layout', $data);
+		return view('base/beranda/layout/index');
 
 	}
 
@@ -76,8 +76,8 @@ class Beranda extends Controller
 		$data['setting'] = $this->BerandaModel->get_setting();
 		$data['title'] = 'Undangan Website';
 		//kirim data ke view
-		$data['view'] = 'base/beranda/tema';
-		return view('base/beranda/layout', $data);
+		// $data['view'] = 'base/beranda/tema';
+		// return view('base/beranda/layout', $data);
 	}
 	public function themes_video()
 	{
