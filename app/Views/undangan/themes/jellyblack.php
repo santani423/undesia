@@ -460,18 +460,24 @@
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/sw-main.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/moment-with-locales.js"></script>
 <script>var base_url = '<?php echo base_url() ?>';</script>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> -->
-<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquery.classyqr.js"></script>
-<script>
-$(document).ready(function() {
-var kode = <?=json_encode($qrcode)?>;
-$('#qrcode').ClassyQR({
-   create:true,
-   type:'text',
-   text: kode
-  });
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var kode = <?=json_encode($qrcode)?>;
+	// Pastikan elemen qrcode kosong sebelum generate baru
+	var qrContainer = document.getElementById('qrcode');
+	if (qrContainer) {
+		qrContainer.innerHTML = '';
+		new QRCode(qrContainer, {
+			text: kode,
+			width: 200,
+			height: 200,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		});
+	}
 });
 </script>
 	<script type="text/javascript">
