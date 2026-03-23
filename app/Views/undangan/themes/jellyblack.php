@@ -469,12 +469,29 @@
   <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
 $(document).ready(function() {
-var kode = <?=json_encode($qrcode)?>;
-$('#qrcode').ClassyQR({
-   create:true,
-   type:'text',
-   text: kode
-  });
+
+// $('#qrcode').ClassyQR({
+//    create:true,
+//    type:'text',
+//    text: kode
+//   });
+
+  let html5QrCode;
+    let currentCameraId = null;
+
+    function generateQR() {
+      const text = document.getElementById("text").value;
+      const container = document.getElementById("qrcode");
+
+      container.innerHTML = "";
+ 
+		var kode = <?=json_encode($qrcode)?>;
+      new QRCode(container, {
+        text: kode,
+        width: 200,
+        height: 200
+      });
+    }
 
 });
 </script>
