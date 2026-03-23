@@ -29,6 +29,7 @@ class Undangan extends Controller
 
 	public function undangan()
 	{
+		return false;
 		clearstatcache();
 		$web = $this->uri->getSegment(2); //memabaca domain user
 		$cekDomain = $this->UndanganModel->cek_domain(urldecode($web));

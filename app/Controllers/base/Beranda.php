@@ -76,8 +76,8 @@ class Beranda extends Controller
 		$data['setting'] = $this->BerandaModel->get_setting();
 		$data['title'] = 'Undangan Website';
 		//kirim data ke view
-		// $data['view'] = 'base/beranda/tema';
-		// return view('base/beranda/layout', $data);
+		$data['view'] = 'base/beranda/tema';
+		return view('base/beranda/layout', $data);
 	}
 	public function themes_video()
 	{
