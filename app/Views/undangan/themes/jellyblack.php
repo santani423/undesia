@@ -44,13 +44,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquery.countdown.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-
-	
-  <!-- QR Generator -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-  <!-- QR Scanner -->
-  <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 
 <body oncontextmenu="return false">
@@ -396,7 +389,6 @@
             <div class="modal-body">
                 <div class="social-share text-center">
                     <span id="qrcode"></span>
-                    <span id="qrcode2"></span>
                 </div>
             </div>
         </div>
@@ -460,32 +452,6 @@
         </div>
     </div>
 </div>
-  <script>
-    let html5QrCode;
-    let currentCameraId = null;
-	$(document).ready(function() {
- 
-generateQR()
-});
-
-    function generateQR() {
-      const text = document.getElementById("text").value;
-      const container = document.getElementById("qrcode2");
-
-      container.innerHTML = "";
-
-      if (!text) {
-        alert("Masukkan teks dulu!");
-        return;
-      }
-
-      new QRCode(container, {
-        text: '99999',
-        width: 200,
-        height: 200
-      });
-    } 
-  </script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/modernizr.custom.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquerypp.custom.js"></script>
@@ -494,6 +460,8 @@ generateQR()
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/sw-main.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/moment-with-locales.js"></script>
 <script>var base_url = '<?php echo base_url() ?>';</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquery.classyqr.js"></script>
 <script>
 $(document).ready(function() {

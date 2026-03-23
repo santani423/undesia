@@ -1,70 +1,77 @@
-/*!
- * jQuery ClassyQR library
- * www.class.pm
- *
- * Written by Marius Stanciu - Sergiu <marius@class.pm>
- * Licensed under the MIT license www.class.pm/LICENSE-MIT
- * Version 1.2.0
- *
- */
 (function ($) {
     $.fn.extend({
-        ClassyQR: function (x) {
-            var c = {
-                baseUrl: 'http://chart.apis.google.com/chart?cht=qr&chs=',
+        ClassyQR: function (options) {
+
+            var defaults = {
                 size: 230,
-                create: false,
+                type: 'text',
+                text: 'Welcome to ClassPM',
+                name: null,
                 number: null,
                 email: null,
                 subject: null,
                 latitude: null,
                 longitude: null,
                 address: null,
-                name: null,
                 url: null,
-                alt: 'QR code',
                 note: null,
-                encoding: 'UTF-8',
-                type: 'text',
-                text: 'Welcome to ClassPM'
+                ssid: null,
+                password: null,
+                auth: null
             };
-            var b = $.extend(c, x);
+
+            var settings = $.extend(defaults, options);
+
             return this.each(function () {
-                var d = $(this);
-                var url = b.baseUrl + b.size + 'x' + b.size + '&choe=' + b.encoding + '&chl=';
-                switch (b.type) {
+                var el = $(this);
+                el.html(""); // reset isi
+
+                let qrText = "";
+
+                switch (settings.type) {
+
                     case 'contact':
-                        url = url + 'MECARD:N:' + b.name + ';TEL:' + b.number +';URL:' + b.url +';EMAIL:' + b.email + ';ADR:' + b.address + ';NOTE:' + b.note + ';';
+                        qrText = `MECARD:N:${settings.name};TEL:${settings.number};URL:${settings.url};EMAIL:${settings.email};ADR:${settings.address};NOTE:${settings.note};`;
                         break;
+
                     case 'wifi':
-                        url = url + 'WIFI:S:' + b.ssid + ';T:' + b.auth + ';P:' + b.password +';';
+                        qrText = `WIFI:S:${settings.ssid};T:${settings.auth};P:${settings.password};`;
                         break;
+
                     case 'location':
-                        url = url + 'geo:' + b.latitude + ',' + b.longitude;
+                        qrText = `geo:${settings.latitude},${settings.longitude}`;
                         break;
+
                     case 'call':
-                        url = url + 'tel:' + b.number;
+                        qrText = `tel:${settings.number}`;
                         break;
+
                     case 'email':
-                        url = url + 'mailto:' + b.email + ':' + b.subject +':' + b.text;
+                        qrText = `mailto:${settings.email}?subject=${settings.subject}&body=${settings.text}`;
                         break;
+
                     case 'sms':
-                        url = url + 'smsto:' +  b.number + ':' + b.text;
+                        qrText = `smsto:${settings.number}:${settings.text}`;
                         break;
+
                     case 'url':
-                        url = url + b.url;
+                        qrText = settings.url;
                         break;
+
                     case 'text':
                     default:
-                        url = url + b.text;
+                        qrText = settings.text;
                         break;
                 }
-                if (b.create) {
-                    d.append('<img src="' + url + '" alt="' + b.alt + '" />');
-                }
-                else {
-                    d.attr('src', url);
-                }
+
+                // Generate QR pakai QRCode.js
+                new QRCode(el[0], {
+                    text: qrText,
+                    width: settings.size,
+                    height: settings.size,
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+
             });
         }
     });
