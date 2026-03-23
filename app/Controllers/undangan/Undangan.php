@@ -96,7 +96,7 @@ class Undangan extends Controller
 					$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
 					$data['alamat_tamu'] = $alamat_tamu;
 					$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
-					$data['qrcode'] = 'Tidak Ada Qrcode';
+					$data['qrcode'] = 'Tidak Ada Qrcode inilahkan hubungi panitia';
 				}
 			} else {
 				$nama_tamu = 'Tamu Undangan';
@@ -105,7 +105,7 @@ class Undangan extends Controller
 				$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
 				$data['alamat_tamu'] = $alamat_tamu;
 				$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
-				$data['qrcode'] = 'Tidak Ada Qrcode';
+				$data['qrcode'] = 'Tidak Ada Qrcode okee';
 			}
 
 			//insert traffic to db
