@@ -461,7 +461,11 @@
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/moment-with-locales.js"></script>
 <script>var base_url = '<?php echo base_url() ?>';</script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- QR Generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- QR Scanner -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
 // Fungsi untuk generate QRCode setiap kali modal dibuka
 function generateQRCode() {
