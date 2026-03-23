@@ -463,16 +463,38 @@
 	<script src="<?php echo base_url() ?>/assets/themes/floral/themes-rsvp/sw-vendor/js/moment-with-locales.js"></script>
 	<script>var base_url = '<?php echo base_url() ?>';</script>
 <script src="<?php echo base_url() ?>/assets/themes/floral/themes-rsvp/sw-vendor/js/jquery.classyqr.js"></script>
+
+  <!-- QR Generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- QR Scanner -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
+// Fungsi untuk generate QRCode setiap kali modal dibuka
+function generateQRCode() {
+	var kode = <?=json_encode($qrcode)?>;
+	var qrContainer = document.getElementById('qrcode');
+	if (qrContainer) {
+		qrContainer.innerHTML = '';
+		console.log("generateQRCode called with kode:", kode);
+		
+		new QRCode(qrContainer, {
+			text: kode,
+			width: 200,
+			height: 200,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		});
+	}
+}
+ 
+// Trigger generate QRCode setiap kali modal sw-qrcode ditampilkan
 $(document).ready(function() {
-    var kode = <?=json_encode($qrcode)?>;
-    $('#qrcode').ClassyQR({
-       create:true,
-       type:'text',
-       text: kode
-      });
+	$('#sw-qrcode').on('shown.bs.modal', function () {
+		generateQRCode();
+	});
 });
-    
 </script>
 	<script type="text/javascript">
 	function copyText(element) {
