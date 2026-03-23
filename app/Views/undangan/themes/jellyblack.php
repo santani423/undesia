@@ -485,19 +485,7 @@ function generateQRCode() {
 		});
 	}
 }
- function generateQRCode() {
-    //   const text = document.getElementById("text").value;
-      const container = document.getElementById("qrcode");
-
-      container.innerHTML = "";
  
-
-      new QRCode(container, {
-        text: "666666",
-        width: 200,
-        height: 200
-      });
-    }
 // Trigger generate QRCode setiap kali modal sw-qrcode ditampilkan
 $(document).ready(function() {
 	$('#sw-qrcode').on('shown.bs.modal', function () {
