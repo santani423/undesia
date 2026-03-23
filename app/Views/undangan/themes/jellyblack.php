@@ -44,6 +44,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquery.countdown.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+	  <!-- QR Generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- QR Scanner -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 
 <body oncontextmenu="return false">
@@ -462,11 +467,7 @@
 <script>var base_url = '<?php echo base_url() ?>';</script>
 <!-- <script src="<?php echo base_url() ?>/assets/themes/jellyblack/themes-rsvp/sw-vendor/js/jquery.classyqr.js"></script> -->
 
-  <!-- QR Generator -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <!-- QR Scanner -->
-  <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
 $(document).ready(function() {
 
