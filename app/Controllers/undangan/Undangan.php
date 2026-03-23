@@ -90,22 +90,23 @@ class Undangan extends Controller
 					$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
 					$data['qrcode'] = $qrcode;
 				} else {
-					$nama_tamu = 'Tamu Undangan';
+					$nama_tamu = $invite;
 					$alamat_tamu = 'Di Tempat';
 					$data['invite'] = $nama_tamu;
 					$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
 					$data['alamat_tamu'] = $alamat_tamu;
 					$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
-					$data['qrcode'] = 'Tidak Ada Qrcode inilahkan hubungi panitia';
+					$data['qrcode'] = 'Tidak Ada Qrcode';
 				}
 			} else {
-				$nama_tamu = 'Tamu Undangan';	
+							$invite = $this->uri->getSegment(3); // nama_slug
+				$nama_tamu = $invite;
 				$alamat_tamu = 'Di Tempat';
 				$data['invite'] = $nama_tamu;
 				$data['invite_slug'] = preg_replace('/%20/', '+', $nama_tamu);
 				$data['alamat_tamu'] = $alamat_tamu;
 				$data['alamat_slug'] = preg_replace('/%20/', '+', $alamat_tamu);
-				$data['qrcode'] = 'Tidak Ada Qrcode okee';
+				$data['qrcode'] = 'Tidak Ada Qrcode';
 			}
 
 			//insert traffic to db
