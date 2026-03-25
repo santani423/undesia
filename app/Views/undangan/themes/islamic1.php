@@ -448,17 +448,31 @@
 <!-- QR Scanner -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
+    function generateQRCode() {
+	var kode = <?=json_encode($qrcode)?>;
+	var qrContainer = document.getElementById('qrcode');
+	if (qrContainer) {
+		qrContainer.innerHTML = '';
+		console.log("generateQRCode called with kode:", kode);
+		
+		new QRCode(qrContainer, {
+			text: kode,
+			width: 200,
+			height: 200,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		});
+	}
+}
     $(document).ready(function() {
         $("#over-lay-welcome").click(function() {
             $("#over-lay-welcome").fadeOut(650);
             $("#player").get(0).play(); //play musik;
         });
         var kode = <?= json_encode($qrcode) ?>;
-        $("#qrcode").ClassyQR({
-            create: true,
-            type: 'text',
-            text: kode
-        });
+        generateQRCode();
+       
         $("#submitKomen").on('click', function(event) {
             var nama = $("#nama").val();
             var komentar = $("#komentar").val();
