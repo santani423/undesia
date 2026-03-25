@@ -408,19 +408,21 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-             <div class="modal-body">
-				<div class="social-share text-center">
-					<span id="qrcode"></span>
-				</style>
-				<style>
-				#sw-qrcode #qrcode {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					width: 100%;
-					min-height: 220px;
-				}
-				</style>
+            <div class="modal-body">
+                <div class="social-share text-center">
+                    <span id="qrcode" style="display: flex; justify-content: center; align-items: center; width: 100%; min-height: 220px;"></span>
+                </div>
+                <style>
+                #qrcode {
+                    display: flex !important;
+                    justify-content: center !important;
+                    align-items: center !important;
+                    width: 100% !important;
+                    min-height: 220px !important;
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                }
+                </style>
                 </div>
             </div>
         </div>
