@@ -329,7 +329,7 @@
 					if ($set->qrcode == 1 && $order[0]->buku_tamu == 1) { ?>
 						<a href="#" class="sw-custom-icon sw-custom-icon-qrcode" data-toggle="modal" data-target="#sw-qrcode" title="QrCode">QrCode</a>
 					<?php }
-					if ($set->hadiah == 1 && $order[0]->kirim_hadiah == 1) { ?>
+					if ($set->hadiah == 1 && $order[0]->kirim_hadiah == 1 && $qrcode != 'Tidak Ada Qrcode') { ?>
 						<a href="#" class="sw-custom-icon sw-custom-icon-gift" data-toggle="modal" data-target="#sw-hadiah" title="Hadiah">Hadiah</a>
 				<?php }
 				} ?>
@@ -397,6 +397,16 @@
 				<div class="modal-body">
 					<div class="social-share text-center">
 						<span id="qrcode"></span>
+						</style>
+						<style>
+							#sw-qrcode #qrcode {
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								width: 100%;
+								min-height: 220px;
+							}
+						</style>
 					</div>
 				</div>
 			</div>
@@ -498,10 +508,10 @@
 			}
 		}
 		$(document).ready(function() {
-	$('#sw-qrcode').on('shown.bs.modal', function () {
-		generateQRCode();
-	});
-});
+			$('#sw-qrcode').on('shown.bs.modal', function() {
+				generateQRCode();
+			});
+		});
 	</script>
 	<script type="text/javascript">
 		function copyText(element) {
