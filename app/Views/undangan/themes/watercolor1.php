@@ -408,11 +408,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <div class="maps">
-                        <span id="qrcode"></span>
-                    </div>
+             <div class="modal-body">
+				<div class="social-share text-center">
+					<span id="qrcode"></span>
+				</style>
+				<style>
+				#sw-qrcode #qrcode {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					min-height: 220px;
+				}
+				</style>
                 </div>
             </div>
         </div>
@@ -461,7 +469,7 @@
             $("#player").get(0).play(); //play musik;
         });
         var kode = <?= json_encode($qrcode) ?>;
-        
+
         generateQRCode();
 
         $("#submitKomen").on('click', function(event) {
