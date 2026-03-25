@@ -472,7 +472,7 @@
         });
         var kode = <?= json_encode($qrcode) ?>;
         generateQRCode();
-       
+        
         $("#submitKomen").on('click', function(event) {
             var nama = $("#nama").val();
             var komentar = $("#komentar").val();
