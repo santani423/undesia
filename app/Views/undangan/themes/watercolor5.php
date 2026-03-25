@@ -401,14 +401,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center">
-                    <div class="maps">
-                        <span id="qrcode"></span>
-                    </div>
+                <div class="social-share text-center">
+                    <span id="qrcode" style="display: flex; justify-content: center; align-items: center; width: 100%; min-height: 220px;"></span>
                 </div>
+                <style>
+                    #qrcode {
+                        display: flex !important;
+                        justify-content: center !important;
+                        align-items: center !important;
+                        width: 100% !important;
+                        min-height: 220px !important;
+                        margin-left: auto !important;
+                        margin-right: auto !important;
+                    }
+                </style>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js></script>
