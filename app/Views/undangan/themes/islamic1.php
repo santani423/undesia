@@ -421,17 +421,9 @@
             </div>
             <div class="modal-body">
                 <div class="social-share text-center">
-                    <span id="qrcode"></span>
-                    </style>
-                    <style>
-                        #sw-qrcode #qrcode {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            width: 100%;
-                            min-height: 220px;
-                        }
-                    </style>
+                    <div style="display: flex; justify-content: center; align-items: center; min-height: 220px; width: 100%;">
+                        <span id="qrcode"></span>
+                    </div>
                 </div>
             </div>
         </div>
