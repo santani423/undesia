@@ -35,8 +35,8 @@ class Beranda extends Controller
 
 	public function index()
 	{
-		header("Location: https://app.undesia.com/");
-		exit;
+		// header("Location: https://app.undesia.com/");
+		// exit;
 		//mengambil semua data themes dari BerandaModel
 		$data['tema'] = $this->BerandaModel->get_all_themes();
 		$data['tema_video'] = $this->BerandaModel->get_all_themes_video();
