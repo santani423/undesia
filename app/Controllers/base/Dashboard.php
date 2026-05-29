@@ -203,6 +203,7 @@ class Dashboard extends Controller
         $data['prokes'] = $this->request->getPost('prokes');
         $data['hadiah'] = $this->request->getPost('hadiah');
         $data['quote'] = $this->request->getPost('quote');
+        $data['dress_code'] = $this->request->getPost('dress_code');
         $update = $this->DashboardModel->update_fitur($data);
         if ($update) {
             $session = session();

@@ -150,6 +150,12 @@
                         <?php if($fitur[0]->quote == '1') echo 'checked'; ?>>
                         <label class="custom-control-label" for="setQuote" >Halaman Quote</label>
                       </div>
+                      <div class="custom-control custom-switch mt-2">
+                        <input type="checkbox" class="custom-control-input" id="setDressCode"
+                        <?php if($fitur[0]->dress_code == '1') echo 'checked'; ?>
+                        <?php if(is_null($fitur[0]->dress_code)) echo ''; ?>>
+                        <label class="custom-control-label" for="setDressCode" >Halaman Dress Code</label>
+                      </div>
                     </div>
                     <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modalFitur">Simpan</button>
                 </div>
@@ -296,10 +302,11 @@
         var qrcode = $('#setQrcode').is(":checked") ? 1 : 0;
         var hadiah = $('#setHadiah').is(":checked") ? 1 : 0;
         var quote = $('#setQuote').is(":checked") ? 1 : 0;
+        var dress_code = $('#setDressCode').is(":checked") ? 1 : 0;
         $.ajax({
             url : "<?= base_url('user/update_fitur') ?>",
             method : "POST",
-            data : {ucapan: ucapan,album: album, cerita: cerita, lokasi: lokasi, prokes:prokes, qrcode:qrcode, hadiah : hadiah, quote:quote},
+            data : {ucapan: ucapan,album: album, cerita: cerita, lokasi: lokasi, prokes:prokes, qrcode:qrcode, hadiah : hadiah, quote:quote, dress_code:dress_code},
             async : true,
             dataType : 'html',
             success: function($hasil){
