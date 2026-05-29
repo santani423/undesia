@@ -332,6 +332,13 @@
       .catch(function() {});
   }
 
+  function parseLatLngFromEmbed(embedVal) {
+    if (!embedVal) { return null; }
+    var match = embedVal.match(/maps\?q=([-\d.]+),([-\d.]+)/);
+    if (match) { return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) }; }
+    return null;
+  }
+
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('.btn-pilih-lokasi');
     if (!btn) { return; }
@@ -342,14 +349,20 @@
     document.getElementById('selected-location-info').style.display = 'none';
     document.getElementById('btn-pakai-lokasi').disabled = true;
     document.getElementById('lokasi-saya-status').textContent = '';
-    selectedLat = null; selectedLng = null;
+
+    // Cek apakah sudah ada lokasi tersimpan
+    var existing = document.getElementById(targetTextareaId);
+    var parsed = existing ? parseLatLngFromEmbed(existing.value) : null;
+    selectedLat = parsed ? parsed.lat : null;
+    selectedLng = parsed ? parsed.lng : null;
+
     $('#modalPilihLokasi').modal('show');
   });
 
   // Bootstrap 4 events are jQuery events — bind inside $(document).ready()
   function bindModalEvents() {
     $(document).on('shown.bs.modal', '#modalPilihLokasi', function() {
-      initMap(-6.2088, 106.8456);
+      initMap(selectedLat || -6.2088, selectedLng || 106.8456);
     });
     $(document).on('hidden.bs.modal', '#modalPilihLokasi', function() {
       if (mapInstance) { mapInstance.remove(); mapInstance = null; mapMarker = null; }
