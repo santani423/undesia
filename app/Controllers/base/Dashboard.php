@@ -720,7 +720,7 @@ class Dashboard extends Controller
         }
         $data['order'] = $this->DashboardModel->get_order_by_id_user();
         $data['title'] = 'Dress Code';
-        $data['view'] = 'base/dashboard/dress_code';
+        // $data['view'] = 'base/dashboard/dress_code';
         return view('base/dashboard/layout', $data);
     }
 
