@@ -40,7 +40,7 @@ class Dashboard extends Controller
             $data['setting_bayar'] = $this->DashboardModel->get_setting_bayar();
             $data['data'] = $this->DashboardModel->get_data_by_id_user();
 
-            // return view('base/dashboard/layout', $data);
+            return view('base/dashboard/layout', $data);
         } else {
             return redirect()->to(base_url('login'));
         }
