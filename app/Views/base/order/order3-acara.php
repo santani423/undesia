@@ -296,20 +296,24 @@
       mapInstance = null;
       mapMarker = null;
     }
-    mapInstance = L.map('map-picker').setView([lat, lng], 15);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(mapInstance);
-    mapMarker = L.marker([lat, lng], { draggable: true }).addTo(mapInstance);
-    mapMarker.on('dragend', function(e) {
-      var pos = e.target.getLatLng();
-      updateSelectedLocation(pos.lat, pos.lng);
-    });
-    mapInstance.on('click', function(e) {
-      mapMarker.setLatLng(e.latlng);
-      updateSelectedLocation(e.latlng.lat, e.latlng.lng);
-    });
-    updateSelectedLocation(lat, lng);
+    // Pastikan container terlihat sebelum init
+    setTimeout(function() {
+      mapInstance = L.map('map-picker').setView([lat, lng], 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(mapInstance);
+      mapMarker = L.marker([lat, lng], { draggable: true }).addTo(mapInstance);
+      mapMarker.on('dragend', function(e) {
+        var pos = e.target.getLatLng();
+        updateSelectedLocation(pos.lat, pos.lng);
+      });
+      mapInstance.on('click', function(e) {
+        mapMarker.setLatLng(e.latlng);
+        updateSelectedLocation(e.latlng.lat, e.latlng.lng);
+      });
+      updateSelectedLocation(lat, lng);
+    }, 100);
   }
 
   function updateSelectedLocation(lat, lng) {
@@ -342,13 +346,28 @@
     $('#modalPilihLokasi').modal('show');
   });
 
-  $('#modalPilihLokasi').on('shown.bs.modal', function() {
-    initMap(-6.2088, 106.8456);
-  });
+  // Bootstrap 4 events are jQuery events — bind inside $(document).ready()
+  function bindModalEvents() {
+    $(document).on('shown.bs.modal', '#modalPilihLokasi', function() {
+      initMap(-6.2088, 106.8456);
+    });
+    $(document).on('hidden.bs.modal', '#modalPilihLokasi', function() {
+      if (mapInstance) { mapInstance.remove(); mapInstance = null; mapMarker = null; }
+    });
+  }
 
-  $('#modalPilihLokasi').on('hidden.bs.modal', function() {
-    if (mapInstance) { mapInstance.remove(); mapInstance = null; mapMarker = null; }
-  });
+  if (typeof $ !== 'undefined') {
+    $(document).ready(bindModalEvents);
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      var checkJQ = setInterval(function() {
+        if (typeof $ !== 'undefined') {
+          clearInterval(checkJQ);
+          bindModalEvents();
+        }
+      }, 50);
+    });
+  }
 
   function doSearch() {
     var q = document.getElementById('map-search-input').value.trim();
