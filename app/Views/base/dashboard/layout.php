@@ -61,6 +61,7 @@
                     <a class="collapse-item" href="<?= base_url('user/acara'); ?>">Acara</a>
                     <a class="collapse-item" href="<?= base_url('user/album'); ?>">Gallery</a>
                     <a class="collapse-item" href="<?= base_url('user/cerita'); ?>">Cerita & Quote</a>
+                    <a class="collapse-item" href="<?= base_url('user/dress_code'); ?>">Dress Code</a>
                     <?php if($_SESSION['kirim_hadiah'] == 1) { ?><a class="collapse-item" href="<?= base_url('user/rekening'); ?>">Rekening</a><?php } ?>
                 </div>
             </div>
