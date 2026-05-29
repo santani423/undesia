@@ -30,6 +30,9 @@ class DashboardModel extends Model
         $this->setting_pembayaran = $db->table('setting_pembayaran');
         $this->paket = $db->table('paket');
         $this->quote = $db->table('quote');
+        $this->dress_codes = $db->table('dress_codes');
+        $this->dress_code_colors = $db->table('dress_code_colors');
+        $this->dress_code_items = $db->table('dress_code_items');
         $this->session = session();
     }
      public function get_paket(){
@@ -579,6 +582,58 @@ class DashboardModel extends Model
         return $builder->update();
         
     }
+    // ===== DRESS CODE =====
+    public function get_dress_code_by_id_user(){
+        $builder = $this->dress_codes;
+        $builder->where('order_id', $_SESSION['id']);
+        return $builder->get()->getResult();
+    }
+
+    public function save_dress_code($data){
+        return $this->dress_codes->insert($data);
+    }
+
+    public function update_dress_code($data){
+        $builder = $this->dress_codes;
+        $builder->where('order_id', $_SESSION['id']);
+        return $builder->update($data);
+    }
+
+    public function get_dress_code_colors($dress_code_id){
+        $builder = $this->dress_code_colors;
+        $builder->where('dress_code_id', $dress_code_id);
+        $builder->orderBy('sort_order', 'ASC');
+        return $builder->get()->getResult();
+    }
+
+    public function save_dress_code_color($data){
+        return $this->dress_code_colors->insert($data);
+    }
+
+    public function delete_dress_code_colors($dress_code_id){
+        $builder = $this->dress_code_colors;
+        $builder->where('dress_code_id', $dress_code_id);
+        return $builder->delete();
+    }
+
+    public function get_dress_code_items($dress_code_id){
+        $builder = $this->dress_code_items;
+        $builder->where('dress_code_id', $dress_code_id);
+        $builder->orderBy('sort_order', 'ASC');
+        return $builder->get()->getResult();
+    }
+
+    public function save_dress_code_item($data){
+        return $this->dress_code_items->insert($data);
+    }
+
+    public function delete_dress_code_items($dress_code_id){
+        $builder = $this->dress_code_items;
+        $builder->where('dress_code_id', $dress_code_id);
+        return $builder->delete();
+    }
+    // ===== END DRESS CODE =====
+
     public function re_order($data){
         $builder2 = $this->order;
         $builder2->set('created_at', date('Y-m-d H:i:s'));

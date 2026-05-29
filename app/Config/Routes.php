@@ -148,6 +148,7 @@ if(isset($_SERVER['HTTP_HOST'])){
 	$routes->get('user/album', 'Dashboard::gallery');
 	$routes->get('user/cerita', 'Dashboard::cerita');
 	$routes->get('user/dress_code', 'Dashboard::dress_code');
+	$routes->post('user/update_dress_code', 'Dashboard::do_update_dress_code');
 	$routes->get('user/rekening', 'Dashboard::rekening');
 	$routes->get('user/invoice', 'Dashboard::invoice');
 	$routes->get('user/profil', 'Dashboard::profil');

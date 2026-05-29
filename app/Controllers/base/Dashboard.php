@@ -710,10 +710,95 @@ class Dashboard extends Controller
 
     public function dress_code()
     {
+        $dress_code = $this->DashboardModel->get_dress_code_by_id_user();
+        $data['dress_code'] = !empty($dress_code) ? $dress_code[0] : null;
+        $data['colors'] = [];
+        $data['items'] = [];
+        if (!empty($dress_code)) {
+            $data['colors'] = $this->DashboardModel->get_dress_code_colors($dress_code[0]->id);
+            $data['items']  = $this->DashboardModel->get_dress_code_items($dress_code[0]->id);
+        }
         $data['order'] = $this->DashboardModel->get_order_by_id_user();
         $data['title'] = 'Dress Code';
         $data['view'] = 'base/dashboard/dress_code';
         return view('base/dashboard/layout', $data);
+    }
+
+    public function do_update_dress_code()
+    {
+        $title           = $this->request->getPost('title');
+        $description     = $this->request->getPost('description');
+        $background_color = $this->request->getPost('background_color') ?? '#ffffff';
+        $text_color      = $this->request->getPost('text_color') ?? '#333333';
+        $is_active       = $this->request->getPost('is_active') ? 1 : 0;
+
+        $existing = $this->DashboardModel->get_dress_code_by_id_user();
+
+        if (empty($existing)) {
+            $dataDressCode = [
+                'order_id'         => $_SESSION['id'],
+                'title'            => $title,
+                'description'      => $description,
+                'background_color' => $background_color,
+                'text_color'       => $text_color,
+                'is_active'        => $is_active,
+                'created_at'       => date('Y-m-d H:i:s'),
+                'updated_at'       => date('Y-m-d H:i:s'),
+            ];
+            $this->DashboardModel->save_dress_code($dataDressCode);
+            $existing = $this->DashboardModel->get_dress_code_by_id_user();
+        } else {
+            $dataDressCode = [
+                'title'            => $title,
+                'description'      => $description,
+                'background_color' => $background_color,
+                'text_color'       => $text_color,
+                'is_active'        => $is_active,
+                'updated_at'       => date('Y-m-d H:i:s'),
+            ];
+            $this->DashboardModel->update_dress_code($dataDressCode);
+        }
+
+        $dress_code_id = $existing[0]->id;
+
+        // Simpan ulang warna (hapus dulu, lalu insert)
+        $this->DashboardModel->delete_dress_code_colors($dress_code_id);
+        $color_hexes = $this->request->getPost('color_hex') ?? [];
+        $color_names = $this->request->getPost('color_name') ?? [];
+        foreach ($color_hexes as $i => $hex) {
+            if (empty($hex)) continue;
+            $this->DashboardModel->save_dress_code_color([
+                'dress_code_id' => $dress_code_id,
+                'color_hex'     => $hex,
+                'color_name'    => $color_names[$i] ?? '',
+                'sort_order'    => $i,
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s'),
+            ]);
+        }
+
+        // Simpan ulang item dress code (hapus dulu, lalu insert)
+        $this->DashboardModel->delete_dress_code_items($dress_code_id);
+        $item_titles = $this->request->getPost('item_title') ?? [];
+        $item_descs  = $this->request->getPost('item_description') ?? [];
+        $item_types  = $this->request->getPost('item_type') ?? [];
+        foreach ($item_titles as $i => $ititle) {
+            if (empty($ititle)) continue;
+            $this->DashboardModel->save_dress_code_item([
+                'dress_code_id' => $dress_code_id,
+                'title'         => $ititle,
+                'description'   => $item_descs[$i] ?? '',
+                'type'          => $item_types[$i] ?? '',
+                'sort_order'    => $i,
+                'is_active'     => 1,
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s'),
+            ]);
+        }
+
+        $session = session();
+        $session->setFlashdata("success", "Data Dress Code Berhasil diupdate");
+        return redirect()->to(base_url('user/dress_code'));
     }
 
     public function rekening()
