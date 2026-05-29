@@ -710,6 +710,9 @@ class Dashboard extends Controller
 
     public function dress_code()
     {
+        if (!session()->has('masukUser')) {
+            return redirect()->to(base_url('login'));
+        }
         $dress_code = $this->DashboardModel->get_dress_code_by_id_user();
         $data['dress_code'] = !empty($dress_code) ? $dress_code[0] : null;
         $data['colors'] = [];
@@ -720,7 +723,7 @@ class Dashboard extends Controller
         }
         $data['order'] = $this->DashboardModel->get_order_by_id_user();
         $data['title'] = 'Dress Code';
-        // $data['view'] = 'base/dashboard/dress_code';
+        $data['view'] = 'base/dashboard/dress_code';
         return view('base/dashboard/layout', $data);
     }
 
