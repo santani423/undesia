@@ -713,27 +713,18 @@ class Dashboard extends Controller
         if (!session()->has('masukUser')) {
             return redirect()->to(base_url('login'));
         }
-        try {
-            $dress_code = $this->DashboardModel->get_dress_code_by_id_user();
-            $data['dress_code'] = !empty($dress_code) ? $dress_code[0] : null;
-            $data['colors'] = [];
-            $data['items'] = [];
-            if (!empty($dress_code)) {
-                $data['colors'] = $this->DashboardModel->get_dress_code_colors($dress_code[0]->id);
-                $data['items']  = $this->DashboardModel->get_dress_code_items($dress_code[0]->id);
-            }
-            $data['order'] = $this->DashboardModel->get_order_by_id_user();
-            $data['title'] = 'Dress Code';
-            $data['view'] = 'base/dashboard/dress_code';
-            return view('base/dashboard/layout', $data);
-        } catch (\Throwable $e) {
-            file_put_contents(WRITEPATH . 'logs/debug_dresscode.txt', date('Y-m-d H:i:s') . ' | ' . $e->getMessage() . ' | File: ' . $e->getFile() . ' Line: ' . $e->getLine() . "\n", FILE_APPEND);
-            echo '<pre style="background:#fff;padding:20px;color:red;font-size:14px;">';
-            echo '<b>ERROR:</b> ' . $e->getMessage() . '<br>';
-            echo '<b>File:</b> ' . $e->getFile() . '<br>';
-            echo '<b>Line:</b> ' . $e->getLine();
-            echo '</pre>';
+        $dress_code = $this->DashboardModel->get_dress_code_by_id_user();
+        $data['dress_code'] = !empty($dress_code) ? $dress_code[0] : null;
+        $data['colors'] = [];
+        $data['items'] = [];
+        if (!empty($dress_code)) {
+            $data['colors'] = $this->DashboardModel->get_dress_code_colors($dress_code[0]->id);
+            $data['items']  = $this->DashboardModel->get_dress_code_items($dress_code[0]->id);
         }
+        $data['order'] = $this->DashboardModel->get_order_by_id_user();
+        $data['title'] = 'Dress Code';
+        $data['view'] = 'base/dashboard/dress_code';
+        return view('base/dashboard/layout', $data);
     }
 
     public function do_update_dress_code()

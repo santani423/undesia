@@ -584,63 +584,54 @@ class DashboardModel extends Model
     }
     // ===== DRESS CODE =====
     public function get_dress_code_by_id_user(){
-        $db = \Config\Database::connect();
-        return $db->table('dress_codes')
-            ->where('order_id', $_SESSION['id'])
-            ->get()->getResult();
+        $builder = $this->dress_codes;
+        $builder->where('order_id', $_SESSION['id']);
+        return $builder->get()->getResult();
     }
 
     public function save_dress_code($data){
-        $db = \Config\Database::connect();
-        $db->table('dress_codes')->insert($data);
-        return $db->insertID();
+        $this->dress_codes->insert($data);
+        return $this->db->insertID();
     }
 
     public function update_dress_code($data){
-        $db = \Config\Database::connect();
-        return $db->table('dress_codes')
-            ->where('order_id', $_SESSION['id'])
-            ->update($data);
+        $builder = $this->dress_codes;
+        $builder->where('order_id', $_SESSION['id']);
+        return $builder->update($data);
     }
 
-    public function get_dress_code_palettes($dress_code_id){
-        $db = \Config\Database::connect();
-        return $db->table('dress_code_palettes')
-            ->where('dress_code_id', $dress_code_id)
-            ->orderBy('sort_order', 'ASC')
-            ->get()->getResult();
+    public function get_dress_code_colors($dress_code_id){
+        $builder = $this->dress_code_palettes;
+        $builder->where('dress_code_id', $dress_code_id);
+        $builder->orderBy('sort_order', 'ASC');
+        return $builder->get()->getResult();
     }
 
     public function save_dress_code_color($data){
-        $db = \Config\Database::connect();
-        return $db->table('dress_code_palettes')->insert($data);
+        return $this->dress_code_palettes->insert($data);
     }
 
-    public function delete_dress_code_palettes($dress_code_id){
-        $db = \Config\Database::connect();
-        return $db->table('dress_code_palettes')
-            ->where('dress_code_id', $dress_code_id)
-            ->delete();
+    public function delete_dress_code_colors($dress_code_id){
+        $builder = $this->dress_code_palettes;
+        $builder->where('dress_code_id', $dress_code_id);
+        return $builder->delete();
     }
 
     public function get_dress_code_items($dress_code_id){
-        $db = \Config\Database::connect();
-        return $db->table('dress_code_items')
-            ->where('dress_code_id', $dress_code_id)
-            ->orderBy('sort_order', 'ASC')
-            ->get()->getResult();
+        $builder = $this->dress_code_items;
+        $builder->where('dress_code_id', $dress_code_id);
+        $builder->orderBy('sort_order', 'ASC');
+        return $builder->get()->getResult();
     }
 
     public function save_dress_code_item($data){
-        $db = \Config\Database::connect();
-        return $db->table('dress_code_items')->insert($data);
+        return $this->dress_code_items->insert($data);
     }
 
     public function delete_dress_code_items($dress_code_id){
-        $db = \Config\Database::connect();
-        return $db->table('dress_code_items')
-            ->where('dress_code_id', $dress_code_id)
-            ->delete();
+        $builder = $this->dress_code_items;
+        $builder->where('dress_code_id', $dress_code_id);
+        return $builder->delete();
     }
     // ===== END DRESS CODE =====
 
