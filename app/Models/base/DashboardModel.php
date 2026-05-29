@@ -583,54 +583,60 @@ class DashboardModel extends Model
         
     }
     // ===== DRESS CODE =====
+    private function db() {
+        return \Config\Database::connect();
+    }
+
     public function get_dress_code_by_id_user(){
-        $builder = $this->dress_codes;
-        $builder->where('order_id', $_SESSION['id']);
-        return $builder->get()->getResult();
+        return $this->db()->table('dress_codes')
+            ->where('order_id', $_SESSION['id'])
+            ->get()->getResult();
     }
 
     public function save_dress_code($data){
-        return $this->dress_codes->insert($data);
+        $db = $this->db();
+        $db->table('dress_codes')->insert($data);
+        return $db->insertID();
     }
 
     public function update_dress_code($data){
-        $builder = $this->dress_codes;
-        $builder->where('order_id', $_SESSION['id']);
-        return $builder->update($data);
+        return $this->db()->table('dress_codes')
+            ->where('order_id', $_SESSION['id'])
+            ->update($data);
     }
 
     public function get_dress_code_colors($dress_code_id){
-        $builder = $this->dress_code_colors;
-        $builder->where('dress_code_id', $dress_code_id);
-        $builder->orderBy('sort_order', 'ASC');
-        return $builder->get()->getResult();
+        return $this->db()->table('dress_code_colors')
+            ->where('dress_code_id', $dress_code_id)
+            ->orderBy('sort_order', 'ASC')
+            ->get()->getResult();
     }
 
     public function save_dress_code_color($data){
-        return $this->dress_code_colors->insert($data);
+        return $this->db()->table('dress_code_colors')->insert($data);
     }
 
     public function delete_dress_code_colors($dress_code_id){
-        $builder = $this->dress_code_colors;
-        $builder->where('dress_code_id', $dress_code_id);
-        return $builder->delete();
+        return $this->db()->table('dress_code_colors')
+            ->where('dress_code_id', $dress_code_id)
+            ->delete();
     }
 
     public function get_dress_code_items($dress_code_id){
-        $builder = $this->dress_code_items;
-        $builder->where('dress_code_id', $dress_code_id);
-        $builder->orderBy('sort_order', 'ASC');
-        return $builder->get()->getResult();
+        return $this->db()->table('dress_code_items')
+            ->where('dress_code_id', $dress_code_id)
+            ->orderBy('sort_order', 'ASC')
+            ->get()->getResult();
     }
 
     public function save_dress_code_item($data){
-        return $this->dress_code_items->insert($data);
+        return $this->db()->table('dress_code_items')->insert($data);
     }
 
     public function delete_dress_code_items($dress_code_id){
-        $builder = $this->dress_code_items;
-        $builder->where('dress_code_id', $dress_code_id);
-        return $builder->delete();
+        return $this->db()->table('dress_code_items')
+            ->where('dress_code_id', $dress_code_id)
+            ->delete();
     }
     // ===== END DRESS CODE =====
 

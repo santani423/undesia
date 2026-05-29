@@ -726,74 +726,76 @@ class Dashboard extends Controller
 
     public function do_update_dress_code()
     {
-        $title           = $this->request->getPost('title');
-        $description     = $this->request->getPost('description');
-        $background_color = $this->request->getPost('background_color') ?? '#ffffff';
-        $text_color      = $this->request->getPost('text_color') ?? '#333333';
-        $is_active       = $this->request->getPost('is_active') ? 1 : 0;
+        $title            = $this->request->getPost('title') ?? '';
+        $description      = $this->request->getPost('description') ?? '';
+        $background_color = $this->request->getPost('background_color') ?: '#ffffff';
+        $text_color       = $this->request->getPost('text_color') ?: '#333333';
+        $is_active        = $this->request->getPost('is_active') ? 1 : 0;
+        $now              = date('Y-m-d H:i:s');
 
         $existing = $this->DashboardModel->get_dress_code_by_id_user();
 
         if (empty($existing)) {
-            $dataDressCode = [
+            // Belum ada data → insert, ambil ID dari return value
+            $dress_code_id = $this->DashboardModel->save_dress_code([
                 'order_id'         => $_SESSION['id'],
                 'title'            => $title,
                 'description'      => $description,
                 'background_color' => $background_color,
                 'text_color'       => $text_color,
                 'is_active'        => $is_active,
-                'created_at'       => date('Y-m-d H:i:s'),
-                'updated_at'       => date('Y-m-d H:i:s'),
-            ];
-            $this->DashboardModel->save_dress_code($dataDressCode);
-            $existing = $this->DashboardModel->get_dress_code_by_id_user();
+                'created_at'       => $now,
+                'updated_at'       => $now,
+            ]);
         } else {
-            $dataDressCode = [
+            $dress_code_id = $existing[0]->id;
+            $this->DashboardModel->update_dress_code([
                 'title'            => $title,
                 'description'      => $description,
                 'background_color' => $background_color,
                 'text_color'       => $text_color,
                 'is_active'        => $is_active,
-                'updated_at'       => date('Y-m-d H:i:s'),
-            ];
-            $this->DashboardModel->update_dress_code($dataDressCode);
+                'updated_at'       => $now,
+            ]);
         }
 
-        $dress_code_id = $existing[0]->id;
-
-        // Simpan ulang warna (hapus dulu, lalu insert)
+        // Simpan ulang warna
         $this->DashboardModel->delete_dress_code_colors($dress_code_id);
-        $color_hexes = $this->request->getPost('color_hex') ?? [];
-        $color_names = $this->request->getPost('color_name') ?? [];
-        foreach ($color_hexes as $i => $hex) {
-            if (empty($hex)) continue;
-            $this->DashboardModel->save_dress_code_color([
-                'dress_code_id' => $dress_code_id,
-                'color_hex'     => $hex,
-                'color_name'    => $color_names[$i] ?? '',
-                'sort_order'    => $i,
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s'),
-            ]);
+        $color_hexes = $this->request->getPost('color_hex');
+        $color_names = $this->request->getPost('color_name');
+        if (is_array($color_hexes)) {
+            foreach ($color_hexes as $i => $hex) {
+                if (empty($hex)) continue;
+                $this->DashboardModel->save_dress_code_color([
+                    'dress_code_id' => $dress_code_id,
+                    'color_hex'     => $hex,
+                    'color_name'    => isset($color_names[$i]) ? $color_names[$i] : '',
+                    'sort_order'    => $i,
+                    'created_at'    => $now,
+                    'updated_at'    => $now,
+                ]);
+            }
         }
 
-        // Simpan ulang item dress code (hapus dulu, lalu insert)
+        // Simpan ulang item
         $this->DashboardModel->delete_dress_code_items($dress_code_id);
-        $item_titles = $this->request->getPost('item_title') ?? [];
-        $item_descs  = $this->request->getPost('item_description') ?? [];
-        $item_types  = $this->request->getPost('item_type') ?? [];
-        foreach ($item_titles as $i => $ititle) {
-            if (empty($ititle)) continue;
-            $this->DashboardModel->save_dress_code_item([
-                'dress_code_id' => $dress_code_id,
-                'title'         => $ititle,
-                'description'   => $item_descs[$i] ?? '',
-                'type'          => $item_types[$i] ?? '',
-                'sort_order'    => $i,
-                'is_active'     => 1,
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s'),
-            ]);
+        $item_titles = $this->request->getPost('item_title');
+        $item_descs  = $this->request->getPost('item_description');
+        $item_types  = $this->request->getPost('item_type');
+        if (is_array($item_titles)) {
+            foreach ($item_titles as $i => $ititle) {
+                if (empty($ititle)) continue;
+                $this->DashboardModel->save_dress_code_item([
+                    'dress_code_id' => $dress_code_id,
+                    'title'         => $ititle,
+                    'description'   => isset($item_descs[$i]) ? $item_descs[$i] : '',
+                    'type'          => isset($item_types[$i]) ? $item_types[$i] : '',
+                    'sort_order'    => $i,
+                    'is_active'     => 1,
+                    'created_at'    => $now,
+                    'updated_at'    => $now,
+                ]);
+            }
         }
 
         $session = session();
