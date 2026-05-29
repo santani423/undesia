@@ -61,12 +61,12 @@
                 <div class="row align-items-center mt-3">
                   <div class="col">
                     <label>Google Maps</label>
-                    <textarea name="maps[]" type="text" class="form-control maps-embed-input" id="maps_embed_1"><?php if(isset($_SESSION['maps0'])) echo $_SESSION['maps0'] ?></textarea>
-                    <div class="mt-2 d-flex align-items-center" style="gap:10px;">
+                    <input type="hidden" name="maps[]" class="maps-embed-input" id="maps_embed_1" value="<?php if(isset($_SESSION['maps0'])) echo htmlspecialchars($_SESSION['maps0']); ?>">
+                    <div class="mt-1 d-flex align-items-center" style="gap:10px;">
                       <button type="button" class="btn btn-sm btn-outline-info btn-pilih-lokasi" data-target="maps_embed_1">
                         <i class="lni-map-marker"></i> Pilih Lokasi di Peta
                       </button>
-                      <a href="<?php echo base_url('maps'); ?>" style="color:#17a2b8;font-size:13px;"><i class="lni-question-circle"></i>&nbsp;Cara Menambahkan Maps</a>
+                      <span id="maps_embed_1_status" class="text-success" style="font-size:12px;"><?php if(isset($_SESSION['maps0']) && $_SESSION['maps0']) echo '&#10003; Lokasi sudah dipilih'; ?></span>
                     </div>
                   </div>
                 </div>
@@ -124,12 +124,12 @@
                 <div class="row align-items-center mt-3">
                   <div class="col">
                     <label>Google Maps</label>
-                    <textarea name="maps[]" type="text" class="form-control maps-embed-input" id="maps_embed_2"><?php if(isset($_SESSION['maps1'])) echo $_SESSION['maps1'] ?></textarea>
-                    <div class="mt-2 d-flex align-items-center" style="gap:10px;">
+                    <input type="hidden" name="maps[]" class="maps-embed-input" id="maps_embed_2" value="<?php if(isset($_SESSION['maps1'])) echo htmlspecialchars($_SESSION['maps1']); ?>">
+                    <div class="mt-1 d-flex align-items-center" style="gap:10px;">
                       <button type="button" class="btn btn-sm btn-outline-info btn-pilih-lokasi" data-target="maps_embed_2">
                         <i class="lni-map-marker"></i> Pilih Lokasi di Peta
                       </button>
-                      <a href="<?php echo base_url('maps'); ?>" style="color:#17a2b8;font-size:13px;"><i class="lni-question-circle"></i>&nbsp;Cara Menambahkan Maps</a>
+                      <span id="maps_embed_2_status" class="text-success" style="font-size:12px;"><?php if(isset($_SESSION['maps1']) && $_SESSION['maps1']) echo '&#10003; Lokasi sudah dipilih'; ?></span>
                     </div>
                   </div>
                 </div>
@@ -194,12 +194,12 @@
                 <div class="row align-items-center mt-3">
                   <div class="col">
                     <label>Google Maps</label>
-                    <textarea name="maps[]" type="text" class="form-control maps-embed-input" id="maps_embed_<?php echo $i+1 ?>"><?php if(isset($_SESSION['maps'.$i])) { echo $_SESSION['maps'.$i]; } ?></textarea>
-                    <div class="mt-2 d-flex align-items-center" style="gap:10px;">
-                      <button type="button" class="btn btn-sm btn-outline-info btn-pilih-lokasi" data-target="maps_embed_<?php echo $i+1 ?>">
+                    <input type="hidden" name="maps[]" class="maps-embed-input" id="maps_embed_<?php echo $i+1; ?>" value="<?php if(isset($_SESSION['maps'.$i])) { echo htmlspecialchars($_SESSION['maps'.$i]); } ?>">
+                    <div class="mt-1 d-flex align-items-center" style="gap:10px;">
+                      <button type="button" class="btn btn-sm btn-outline-info btn-pilih-lokasi" data-target="maps_embed_<?php echo $i+1; ?>">
                         <i class="lni-map-marker"></i> Pilih Lokasi di Peta
                       </button>
-                      <a href="<?php echo base_url('maps'); ?>" style="color:#17a2b8;font-size:13px;"><i class="lni-question-circle"></i>&nbsp;Cara Menambahkan Maps</a>
+                      <span id="maps_embed_<?php echo $i+1; ?>_status" class="text-success" style="font-size:12px;"><?php if(isset($_SESSION['maps'.$i]) && $_SESSION['maps'.$i]) { echo '&#10003; Lokasi sudah dipilih'; } ?></span>
                     </div>
                   </div>
                 </div>
@@ -434,6 +434,8 @@
     var embed = '<iframe src="https://maps.google.com/maps?q=' + selectedLat + ',' + selectedLng
       + '&hl=id&z=16&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
     document.getElementById(targetTextareaId).value = embed;
+    var statusEl = document.getElementById(targetTextareaId + '_status');
+    if (statusEl) { statusEl.innerHTML = '&#10003; Lokasi sudah dipilih'; }
     $('#modalPilihLokasi').modal('hide');
   });
 })();
