@@ -31,7 +31,7 @@ class DashboardModel extends Model
         $this->paket = $db->table('paket');
         $this->quote = $db->table('quote');
         $this->dress_codes = $db->table('dress_codes');
-        $this->dress_code_colors = $db->table('dress_code_colors');
+        $this->dress_code_palettes = $db->table('dress_code_palettes');
         $this->dress_code_items = $db->table('dress_code_items');
         $this->session = session();
     }
@@ -603,9 +603,9 @@ class DashboardModel extends Model
             ->update($data);
     }
 
-    public function get_dress_code_colors($dress_code_id){
+    public function get_dress_code_palettes($dress_code_id){
         $db = \Config\Database::connect();
-        return $db->table('dress_code_colors')
+        return $db->table('dress_code_palettes')
             ->where('dress_code_id', $dress_code_id)
             ->orderBy('sort_order', 'ASC')
             ->get()->getResult();
@@ -613,12 +613,12 @@ class DashboardModel extends Model
 
     public function save_dress_code_color($data){
         $db = \Config\Database::connect();
-        return $db->table('dress_code_colors')->insert($data);
+        return $db->table('dress_code_palettes')->insert($data);
     }
 
-    public function delete_dress_code_colors($dress_code_id){
+    public function delete_dress_code_palettes($dress_code_id){
         $db = \Config\Database::connect();
-        return $db->table('dress_code_colors')
+        return $db->table('dress_code_palettes')
             ->where('dress_code_id', $dress_code_id)
             ->delete();
     }
