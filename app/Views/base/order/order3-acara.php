@@ -61,13 +61,13 @@
                 <div class="row align-items-center mt-3">
                   <div class="col">
                     <label>Google Maps</label>
-                    <textarea name="maps[]" type="text" class="form-control"><?php if(isset($_SESSION['maps0'])) echo $_SESSION['maps0'] ?></textarea>
-                    <div class="mt-1">
-                            <label class="form-check-label ">
-                            <a href="<?php echo base_url('maps'); ?>" style="margin-top: 105px;color: #2c3e50;position: relative;top:3px;color:#17a2b8;"><i class="lni-question-circle" style="color:#17a2b8;"></i>&nbsp Cara Menambahkan Maps</a>
-                            </label>
-                                
-                            </div>
+                    <textarea name="maps[]" type="text" class="form-control maps-embed-input" id="maps_embed_1"><?php if(isset($_SESSION['maps0'])) echo $_SESSION['maps0'] ?></textarea>
+                    <div class="mt-2 d-flex align-items-center" style="gap:10px;">
+                      <button type="button" class="btn btn-sm btn-outline-info btn-pilih-lokasi" data-target="maps_embed_1">
+                        <i class="lni-map-marker"></i> Pilih Lokasi di Peta
+                      </button>
+                      <a href="<?php echo base_url('maps'); ?>" style="color:#17a2b8;font-size:13px;"><i class="lni-question-circle"></i>&nbsp;Cara Menambahkan Maps</a>
+                    </div>
                   </div>
                 </div>
                 
@@ -124,13 +124,13 @@
                 <div class="row align-items-center mt-3">
                   <div class="col">
                     <label>Google Maps</label>
-                    <textarea name="maps[]" type="text" class="form-control" ><?php if(isset($_SESSION['maps1'])) echo $_SESSION['maps1'] ?></textarea>
-                    <div class="mt-1">
-                            <label class="form-check-label ">
-                            <a href="<?php echo base_url('maps'); ?>" style="margin-top: 105px;color: #2c3e50;position: relative;top:3px;color:#17a2b8;"><i class="lni-question-circle" style="color:#17a2b8;"></i>&nbsp Cara Menambahkan Maps</a>
-                            </label>
-                                
-                            </div>
+                    <textarea name="maps[]" type="text" class="form-control maps-embed-input" id="maps_embed_2"><?php if(isset($_SESSION['maps1'])) echo $_SESSION['maps1'] ?></textarea>
+                    <div class="mt-2 d-flex align-items-center" style="gap:10px;">
+                      <button type="button" class="btn btn-sm btn-outline-info btn-pilih-lokasi" data-target="maps_embed_2">
+                        <i class="lni-map-marker"></i> Pilih Lokasi di Peta
+                      </button>
+                      <a href="<?php echo base_url('maps'); ?>" style="color:#17a2b8;font-size:13px;"><i class="lni-question-circle"></i>&nbsp;Cara Menambahkan Maps</a>
+                    </div>
                   </div>
                 </div>
                 
@@ -194,13 +194,13 @@
                 <div class="row align-items-center mt-3">
                   <div class="col">
                     <label>Google Maps</label>
-                    <textarea name="maps[]" type="text" class="form-control"><?php if(isset($_SESSION['maps'.$i])) echo $_SESSION['maps'.$i] ?></textarea>
-                    <div class="mt-1">
-                            <label class="form-check-label ">
-                            <a href="<?php echo base_url('maps'); ?>" style="margin-top: 105px;color: #2c3e50;position: relative;top:3px;color:#17a2b8;"><i class="lni-question-circle" style="color:#17a2b8;"></i>&nbsp Cara Menambahkan Maps</a>
-                            </label>
-                                
-                            </div>
+                    <textarea name="maps[]" type="text" class="form-control maps-embed-input" id="maps_embed_<?php echo $i+1 ?>"><?php if(isset($_SESSION['maps'.$i])) { echo $_SESSION['maps'.$i]; } ?></textarea>
+                    <div class="mt-2 d-flex align-items-center" style="gap:10px;">
+                      <button type="button" class="btn btn-sm btn-outline-info btn-pilih-lokasi" data-target="maps_embed_<?php echo $i+1 ?>">
+                        <i class="lni-map-marker"></i> Pilih Lokasi di Peta
+                      </button>
+                      <a href="<?php echo base_url('maps'); ?>" style="color:#17a2b8;font-size:13px;"><i class="lni-question-circle"></i>&nbsp;Cara Menambahkan Maps</a>
+                    </div>
                   </div>
                 </div>
                 
@@ -240,3 +240,182 @@
       </div>
     </section>
 </div>
+
+<!-- Modal Pilih Lokasi -->
+<div class="modal fade" id="modalPilihLokasi" tabindex="-1" role="dialog" aria-labelledby="modalPilihLokasiLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background:#3498db;color:#fff;padding:12px 16px;">
+        <h5 class="modal-title" id="modalPilihLokasiLabel" style="font-size:16px;">Pilih Lokasi Acara</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#fff;opacity:1;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:12px;">
+        <div class="input-group mb-2">
+          <input type="text" id="map-search-input" class="form-control" placeholder="Cari lokasi... (contoh: Gedung Sari, Jakarta)">
+          <div class="input-group-append">
+            <button class="btn btn-info" type="button" id="btn-cari-lokasi">Cari</button>
+          </div>
+        </div>
+        <ul id="map-search-results" class="list-group mb-2" style="max-height:140px;overflow-y:auto;display:none;"></ul>
+        <div class="mb-2">
+          <button type="button" class="btn btn-sm btn-outline-success" id="btn-lokasi-saya">
+            <i class="lni-map-marker"></i> Gunakan Lokasi Saya Saat Ini
+          </button>
+          <small id="lokasi-saya-status" class="ml-2 text-muted"></small>
+        </div>
+        <div id="map-picker" style="height:340px;border-radius:8px;border:1px solid #ddd;"></div>
+        <small class="text-muted mt-1 d-block">Klik pada peta atau seret marker untuk memilih lokasi yang tepat.</small>
+        <div id="selected-location-info" class="alert alert-info mt-2 py-2" style="display:none;font-size:13px;"></div>
+      </div>
+      <div class="modal-footer" style="padding:8px 16px;">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btn-pakai-lokasi" disabled>Pakai Lokasi Ini</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+(function() {
+  var mapInstance = null;
+  var mapMarker = null;
+  var selectedLat = null;
+  var selectedLng = null;
+  var targetTextareaId = null;
+
+  function initMap(lat, lng) {
+    lat = lat || -6.2088;
+    lng = lng || 106.8456;
+    if (mapInstance) {
+      mapInstance.remove();
+      mapInstance = null;
+      mapMarker = null;
+    }
+    mapInstance = L.map('map-picker').setView([lat, lng], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(mapInstance);
+    mapMarker = L.marker([lat, lng], { draggable: true }).addTo(mapInstance);
+    mapMarker.on('dragend', function(e) {
+      var pos = e.target.getLatLng();
+      updateSelectedLocation(pos.lat, pos.lng);
+    });
+    mapInstance.on('click', function(e) {
+      mapMarker.setLatLng(e.latlng);
+      updateSelectedLocation(e.latlng.lat, e.latlng.lng);
+    });
+    updateSelectedLocation(lat, lng);
+  }
+
+  function updateSelectedLocation(lat, lng) {
+    selectedLat = lat;
+    selectedLng = lng;
+    document.getElementById('btn-pakai-lokasi').disabled = false;
+    var info = document.getElementById('selected-location-info');
+    info.style.display = 'block';
+    info.innerHTML = 'Koordinat: <strong>' + lat.toFixed(6) + ', ' + lng.toFixed(6) + '</strong>';
+    fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var addr = data.display_name || (lat + ',' + lng);
+        info.innerHTML = 'Lokasi: <strong>' + addr + '</strong><br><small class="text-muted">Koordinat: ' + lat.toFixed(6) + ', ' + lng.toFixed(6) + '</small>';
+      })
+      .catch(function() {});
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.btn-pilih-lokasi');
+    if (!btn) { return; }
+    targetTextareaId = btn.getAttribute('data-target');
+    document.getElementById('map-search-input').value = '';
+    document.getElementById('map-search-results').style.display = 'none';
+    document.getElementById('map-search-results').innerHTML = '';
+    document.getElementById('selected-location-info').style.display = 'none';
+    document.getElementById('btn-pakai-lokasi').disabled = true;
+    document.getElementById('lokasi-saya-status').textContent = '';
+    selectedLat = null; selectedLng = null;
+    $('#modalPilihLokasi').modal('show');
+  });
+
+  $('#modalPilihLokasi').on('shown.bs.modal', function() {
+    initMap(-6.2088, 106.8456);
+  });
+
+  $('#modalPilihLokasi').on('hidden.bs.modal', function() {
+    if (mapInstance) { mapInstance.remove(); mapInstance = null; mapMarker = null; }
+  });
+
+  function doSearch() {
+    var q = document.getElementById('map-search-input').value.trim();
+    if (!q) { return; }
+    var resultList = document.getElementById('map-search-results');
+    resultList.innerHTML = '<li class="list-group-item text-muted" style="font-size:13px;">Mencari...</li>';
+    resultList.style.display = 'block';
+    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(q) + '&limit=5&accept-language=id')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        resultList.innerHTML = '';
+        if (!data.length) {
+          resultList.innerHTML = '<li class="list-group-item text-muted" style="font-size:13px;">Lokasi tidak ditemukan.</li>';
+          return;
+        }
+        data.forEach(function(item) {
+          var li = document.createElement('li');
+          li.className = 'list-group-item list-group-item-action py-1';
+          li.style.fontSize = '13px';
+          li.style.cursor = 'pointer';
+          li.textContent = item.display_name;
+          li.addEventListener('click', function() {
+            var lat = parseFloat(item.lat);
+            var lng = parseFloat(item.lon);
+            mapInstance.setView([lat, lng], 16);
+            mapMarker.setLatLng([lat, lng]);
+            updateSelectedLocation(lat, lng);
+            resultList.style.display = 'none';
+          });
+          resultList.appendChild(li);
+        });
+      })
+      .catch(function() {
+        resultList.innerHTML = '<li class="list-group-item text-danger" style="font-size:13px;">Gagal mencari lokasi.</li>';
+      });
+  }
+
+  document.getElementById('btn-cari-lokasi').addEventListener('click', doSearch);
+  document.getElementById('map-search-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+  });
+
+  document.getElementById('btn-lokasi-saya').addEventListener('click', function() {
+    var status = document.getElementById('lokasi-saya-status');
+    if (!navigator.geolocation) {
+      status.textContent = 'Browser tidak mendukung geolokasi.';
+      return;
+    }
+    status.textContent = 'Mendapatkan lokasi...';
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      status.textContent = '';
+      var lat = pos.coords.latitude;
+      var lng = pos.coords.longitude;
+      mapInstance.setView([lat, lng], 17);
+      mapMarker.setLatLng([lat, lng]);
+      updateSelectedLocation(lat, lng);
+    }, function() {
+      status.textContent = 'Gagal mendapatkan lokasi. Pastikan izin lokasi diaktifkan.';
+    });
+  });
+
+  document.getElementById('btn-pakai-lokasi').addEventListener('click', function() {
+    if (!selectedLat || !selectedLng || !targetTextareaId) { return; }
+    var embed = '<iframe src="https://maps.google.com/maps?q=' + selectedLat + ',' + selectedLng
+      + '&hl=id&z=16&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+    document.getElementById(targetTextareaId).value = embed;
+    $('#modalPilihLokasi').modal('hide');
+  });
+})();
+</script>
