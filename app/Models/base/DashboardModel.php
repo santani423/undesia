@@ -583,58 +583,62 @@ class DashboardModel extends Model
         
     }
     // ===== DRESS CODE =====
-    private function db() {
-        return \Config\Database::connect();
-    }
-
     public function get_dress_code_by_id_user(){
-        return $this->db()->table('dress_codes')
+        $db = \Config\Database::connect();
+        return $db->table('dress_codes')
             ->where('order_id', $_SESSION['id'])
             ->get()->getResult();
     }
 
     public function save_dress_code($data){
-        $db = $this->db();
+        $db = \Config\Database::connect();
         $db->table('dress_codes')->insert($data);
         return $db->insertID();
     }
 
     public function update_dress_code($data){
-        return $this->db()->table('dress_codes')
+        $db = \Config\Database::connect();
+        return $db->table('dress_codes')
             ->where('order_id', $_SESSION['id'])
             ->update($data);
     }
 
     public function get_dress_code_colors($dress_code_id){
-        return $this->db()->table('dress_code_colors')
+        $db = \Config\Database::connect();
+        return $db->table('dress_code_colors')
             ->where('dress_code_id', $dress_code_id)
             ->orderBy('sort_order', 'ASC')
             ->get()->getResult();
     }
 
     public function save_dress_code_color($data){
-        return $this->db()->table('dress_code_colors')->insert($data);
+        $db = \Config\Database::connect();
+        return $db->table('dress_code_colors')->insert($data);
     }
 
     public function delete_dress_code_colors($dress_code_id){
-        return $this->db()->table('dress_code_colors')
+        $db = \Config\Database::connect();
+        return $db->table('dress_code_colors')
             ->where('dress_code_id', $dress_code_id)
             ->delete();
     }
 
     public function get_dress_code_items($dress_code_id){
-        return $this->db()->table('dress_code_items')
+        $db = \Config\Database::connect();
+        return $db->table('dress_code_items')
             ->where('dress_code_id', $dress_code_id)
             ->orderBy('sort_order', 'ASC')
             ->get()->getResult();
     }
 
     public function save_dress_code_item($data){
-        return $this->db()->table('dress_code_items')->insert($data);
+        $db = \Config\Database::connect();
+        return $db->table('dress_code_items')->insert($data);
     }
 
     public function delete_dress_code_items($dress_code_id){
-        return $this->db()->table('dress_code_items')
+        $db = \Config\Database::connect();
+        return $db->table('dress_code_items')
             ->where('dress_code_id', $dress_code_id)
             ->delete();
     }
