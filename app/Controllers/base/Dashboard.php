@@ -708,6 +708,14 @@ class Dashboard extends Controller
         return redirect()->to(base_url('user/cerita'));
     }
 
+    public function dress_code()
+    {
+        $data['order'] = $this->DashboardModel->get_order_by_id_user();
+        $data['title'] = 'Dress Code';
+        $data['view'] = 'base/dashboard/dress_code';
+        return view('base/dashboard/layout', $data);
+    }
+
     public function rekening()
     {
         $data['data'] = $this->DashboardModel->get_data_by_id_user();
